@@ -1,2 +1,2 @@
-# Inventor JS Mobile
-Inventor JS mobile
+# Inventor JS 
+Desarrolla aplicaciones moviles y web con inventor js
