@@ -1,1 +1,1 @@
-{"version":3,"file":"InventorMobile.js","sourceRoot":"","sources":["InventorMobile.ts"],"names":[],"mappings":"AAAA,KAAK,CAAC,yBAAyB,CAAC,CAAC"}
+{"version":3,"file":"InventorMobile.js","sourceRoot":"","sources":["InventorMobile.ts"],"names":["Form","Form.constructor"],"mappings":";;;;;;AAQA,AARA;;;;;;;GAOG;IACG,IAAI;IAASA,UAAbA,IAAIA,UAAiBA;IAEvBA,SAFEA,IAAIA,CAEMA,OAAwBA;QAChCC,kBAAMA,OAAOA,CAACA,CAACA;IACnBA,CAACA;IAELD,WAACA;AAADA,CAACA,AAND,EAAmB,QAAQ,EAM1B"}

@@ -1,1 +1,1 @@
-﻿alert("Hello Inventor Web")
+﻿
