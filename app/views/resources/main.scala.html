@@ -1,0 +1,35 @@
+@(title:String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="develops amazing applications with inventorjs.">
+<meta name="author" content="Yonatan Alexis Quintero Rodriguez | yonax73@@gmail.com | @@yonax73">
+<title>@title</title>
+<link href="@routes.Assets.at("stylesheets/inventor/inventor.min.css")" rel="stylesheet" media="screen" >
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="@routes.Assets.at("stylesheets/main.css")" rel="stylesheet" media="screen" >
+<link href="@routes.Assets.at("images/favicon.png")" rel="shortcut icon" type="image/png" >
+
+</head>
+<script src="@routes.Assets.at("javascripts/inventor-js/Inventor.js")"></script>
+<script src="@routes.Assets.at("javascripts/inventor-js/InventorMobile.js")"></script>
+<body class="i-ease-in i-1s i-fade-in">
+<section class="container">@content</section>
+<div class="i-popup-mask hidden"></div>
+<div id="success-popup" class="i-popup-panel i-popup-panel-success hidden">
+	 <h5>This user has successfully registered</h5>
+	 <button class="btn btn-success btn-lg btn-block i-popup-close">Aceptar</button>
+</div>
+<div id="error-popup" class="i-popup-panel hidden">
+	 <h3></h3>
+</div>
+    <script>	       
+	       var successPopup = new Popup(document.getElementById('success-popup'));
+	       var erroPopup = new Popup(document.getElementById('error-popup'));
+	</script>
+</body>
+</html>
