@@ -5717,6 +5717,49 @@ button.close {
   border-top: 1px solid #eb4646;
   border-bottom: 3px solid #eb4646;
 }
+.i-checkbox input[type="checkbox"] + label::before {
+  font-family: FontAwesome;
+  font-size: 2em;
+  font-weight: normal;
+  padding: 0.2em 0.1em 0.8em 0.3em;
+}
+.i-checkbox input[type="checkbox"] {
+  display: none;
+}
+.i-checkbox input[type="checkbox"][disabled] + label {
+  cursor: not-allowed;
+}
+.i-checkbox input[type="checkbox"][disabled] + label,
+.i-checkbox input[type="checkbox"][disabled] + label::before {
+  color: #999999;
+}
+.i-checkbox.i-1x input[type="checkbox"] + label::before {
+  font-size: 1.5em;
+}
+.i-checkbox.i-checkbox-f input[type="checkbox"] + label::before {
+  content: "\f0c8";
+}
+.i-checkbox.i-checkbox-f input[type="checkbox"]:checked + label::before {
+  content: "\f14a";
+}
+.i-checkbox.i-checkbox-default label::before {
+  color: #000000;
+}
+.i-checkbox.i-checkbox-primary label::before {
+  color: #de5619;
+}
+.i-checkbox.i-checkbox-success label::before {
+  color: #1bbe9e;
+}
+.i-checkbox.i-checkbox-info label::before {
+  color: #049dbf;
+}
+.i-checkbox.i-checkbox-warning label::before {
+  color: #ed9e46;
+}
+.i-checkbox.i-checkbox-danger label::before {
+  color: #eb4646;
+}
 .modal-open {
   overflow: hidden;
 }

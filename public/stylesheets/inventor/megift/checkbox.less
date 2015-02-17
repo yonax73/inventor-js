@@ -1,0 +1,65 @@
+﻿// Popup by Inventorjs | @yonax73 | yonax73@gmail.com | Create 02-17-2015 | update 02-17-2015 by @yonax73
+// --------------------------------------------------
+
+
+// Base class
+// -------------------------
+
+.i-checkbox input[type="checkbox"] + label::before {
+    font-family: FontAwesome;
+    font-size: 2em;
+    font-weight: normal;
+    padding: 0.2em 0.1em 0.8em 0.3em;
+}
+
+.i-checkbox input[type="checkbox"] {
+    display: none;
+}
+// disabled
+// -------------------------
+.i-checkbox input[type="checkbox"][disabled] + label {
+    cursor: not-allowed;
+}
+.i-checkbox input[type="checkbox"][disabled] + label,
+.i-checkbox input[type="checkbox"][disabled] + label::before {
+    color: @checkbox-disabled-color;
+}
+// size
+// -------------------------
+.i-checkbox.i-1x input[type="checkbox"] + label::before {
+    font-size: 1.5em;
+}
+//icon control normal state
+// -------------------------
+.i-checkbox.i-checkbox-f input[type="checkbox"] + label::before {
+    content: "\f0c8";
+}
+//icon control checck state
+.i-checkbox.i-checkbox-f input[type="checkbox"]:checked + label::before {
+    content: "\f14a";
+}
+// Contextual variations
+//------------------------------------
+.i-checkbox.i-checkbox-default label::before {
+    color: @checkbox-default-color;
+}
+
+.i-checkbox.i-checkbox-primary label::before {
+    color: @checkbox-primary-color;
+}
+
+.i-checkbox.i-checkbox-success label::before {
+    color: @checkbox-success-color;
+}
+
+.i-checkbox.i-checkbox-info label::before {
+    color: @checkbox-info-color;
+}
+
+.i-checkbox.i-checkbox-warning label::before {
+    color: @checkbox-warning-color;
+}
+
+.i-checkbox.i-checkbox-danger label::before {
+    color: @checkbox-danger-color;
+}
