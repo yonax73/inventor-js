@@ -1,0 +1,47 @@
+// Popup by Inventorjs | @yonax73 | yonax73@gmail.com | Create 02-17-2015 | update 02-17-2015 by @yonax73
+// --------------------------------------------------
+
+
+// Base class
+// -------------------------
+.i-popup-mask{
+    background-color:rgba(0,0,0,0.65);    
+	position:absolute;
+	z-index: 99998;
+	top:0;
+	left:0;
+	width:100%;
+	height: 100%;
+}
+.i-popup-panel{    
+   border-left:none;
+   border-right:none;    
+   display: table;
+   height: auto;
+   left: 0;
+   padding: 0.5em 5em;
+   position: absolute;
+   top: 20%;
+   width: 100%;
+   z-index: 99999;
+}
+// Contextual variations
+//------------------------------------
+.i-popup-default {
+  .popup-variant(@popup-default-bg,@popup-default-border);
+}
+.i-popup-primary {
+  .popup-variant(@popup-primary-bg,@popup-primary-border);
+}
+.i-popup-success {
+  .popup-variant(@popup-success-bg,@popup-success-border);
+}
+.i-popup-info {
+  .popup-variant(@popup-info-bg,@popup-info-border);
+}
+.i-popup-warning {
+  .popup-variant(@popup-warning-bg,@popup-warning-border);
+}
+.i-popup-danger {
+  .popup-variant(@popup-danger-bg,@popup-danger-border);
+}
