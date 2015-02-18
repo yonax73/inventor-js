@@ -5731,7 +5731,7 @@ button.close {
 }
 .i-checkbox input[type="checkbox"][disabled] + label,
 .i-checkbox input[type="checkbox"][disabled] + label::before {
-  color: #999999;
+  color: #777777;
 }
 .i-checkbox.i-1x input[type="checkbox"] + label::before {
   font-size: 1.5em;
@@ -5759,6 +5759,125 @@ button.close {
 }
 .i-checkbox.i-checkbox-danger label::before {
   color: #eb4646;
+}
+.i-radio input[type="radio"] + label::before {
+  font-family: FontAwesome;
+  font-size: 2em;
+  font-weight: normal;
+  padding: 0.2em 0.1em 0.8em 0.3em;
+}
+.i-radio input[type="radio"] {
+  display: none;
+}
+.i-radio.i-radio-toolbar label {
+  display: table-cell;
+  padding: 1em;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+  vertical-align: baseline;
+  border: 1px solid #c4c4c4;
+}
+.i-radio.i-radio-toolbar input[type="radio"] + label::before {
+  font-size: 85%;
+  content: "\f00c";
+  opacity: 0;
+}
+.i-radio.i-radio-toolbar input[type="radio"]:checked + label::before {
+  font-size: 85%;
+  content: "\f00c";
+  opacity: 1;
+}
+.i-radio.i-1x input[type="radio"] + label::before {
+  font-size: 1.5em;
+}
+.form-group.i-radio-horizontal {
+  display: flexbox;
+  display: flex;
+}
+.form-group.i-radio-horizontal span:first-child label {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.form-group.i-radio-horizontal span label {
+  border-right-width: 0;
+}
+.form-group.i-radio-horizontal span:last-child label {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-right-width: 1px;
+}
+.form-group.i-radio-vertical {
+  display: table-caption;
+}
+.form-group.i-radio-vertical span:first-child label {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.form-group.i-radio-vertical span label {
+  border-bottom-width: 0;
+}
+.form-group.i-radio-vertical span:last-child label {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-width: 1px;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-default input[type="radio"] + label::before {
+  color: #000000;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-default label {
+  background-color: #ffffff;
+  border-color: #b3b3b3;
+  color: #000000;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-primary input[type="radio"] + label::before {
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-primary label {
+  background-color: #de5619;
+  border-color: #c74d16;
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-success input[type="radio"] + label::before {
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-success label {
+  background-color: #1bbe9e;
+  border-color: #18a88b;
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-info input[type="radio"] + label::before {
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-info label {
+  background-color: #049dbf;
+  border-color: #0388a6;
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-warning input[type="radio"] + label::before {
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-warning label {
+  background-color: #ed9e46;
+  border-color: #eb922f;
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-danger input[type="radio"] + label::before {
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar.i-radio-toolbar-danger label {
+  background-color: #eb4646;
+  border-color: #e92f2f;
+  color: #ffffff;
+}
+.i-radio.i-radio-toolbar input[type="radio"][disabled] + label {
+  background-color: #eeeeee;
+  border-color: #e2e2e2;
+  color: #777777;
+  cursor: not-allowed;
+}
+.i-radio.i-radio-toolbar input[type="radio"][disabled] + label::before {
+  color: #777777;
 }
 .modal-open {
   overflow: hidden;

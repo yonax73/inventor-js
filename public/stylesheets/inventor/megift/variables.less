@@ -878,12 +878,12 @@
 @popup-danger-bg:            #fff;
 @popup-danger-border:        @brand-danger;
 
-//== Custom Controls
+//== Checkbox Controls
 //
 //##
 @checkbox-default-color: #000;
 
-@checkbox-disabled-color: #999;
+@checkbox-disabled-color: @gray-light;
 
 @checkbox-primary-color: @brand-primary;
 
@@ -894,3 +894,44 @@
 @checkbox-warning-color: @brand-warning;           
 
 @checkbox-danger-color: @brand-danger;           
+
+//== Radio buttons controls
+//
+//##
+@radio-toolbar-border-radius :              0;
+
+@radio-toolbar-disabled-bg:                  @gray-lighter;
+@radio-toolbar-disabled-border:              darken(@radio-toolbar-disabled-bg,5%);
+@radio-toolbar-disabled-color:               @gray-light;
+@radio-toolbar-before-disabled-color:        @radio-toolbar-disabled-color;
+
+@radio-toolbar-default-bg:                  #fff;
+@radio-toolbar-default-border:              darken(@radio-toolbar-default-bg,30%);
+@radio-toolbar-default-color:               #000;
+@radio-toolbar-before-default-color:        @radio-toolbar-default-color;
+
+@radio-toolbar-primary-bg:                  @brand-primary;
+@radio-toolbar-primary-border:              darken(@radio-toolbar-primary-bg,5%);
+@radio-toolbar-primary-color:               #fff;
+@radio-toolbar-before-primary-color:        @radio-toolbar-primary-color;
+
+@radio-toolbar-success-bg:                  @brand-success;
+@radio-toolbar-success-border:              darken(@radio-toolbar-success-bg,5%);
+@radio-toolbar-success-color:               #fff;
+@radio-toolbar-before-success-color:        @radio-toolbar-success-color;
+
+@radio-toolbar-info-bg:                    @brand-info;
+@radio-toolbar-info-border:                darken(@radio-toolbar-info-bg,5%);
+@radio-toolbar-info-color:                 #fff;
+@radio-toolbar-before-info-color:          @radio-toolbar-info-color;
+
+@radio-toolbar-warning-bg:                 @brand-warning;
+@radio-toolbar-warning-border:             darken(@radio-toolbar-warning-bg,5%);
+@radio-toolbar-warning-color:              #fff;
+@radio-toolbar-before-warning-color:       @radio-toolbar-warning-color;
+
+@radio-toolbar-danger-bg:                  @brand-danger;
+@radio-toolbar-danger-border:              darken(@radio-toolbar-danger-bg,5%);
+@radio-toolbar-danger-color:               #fff;
+@radio-toolbar-before-danger-color:        @radio-toolbar-danger-color;
+
