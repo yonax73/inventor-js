@@ -1,6 +1,23 @@
 /**
 @ Autor :@yonax73 | yonax73@gmail.com
 @ Version: 0.1
+@ Date : 18/02/2015
+@ Date update: 16/02/2015
+@ Update by: @yonax73  | yonax73@gmail.com
+@ Description: Utils
+**/
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils.getWindowMaxHeight = function () {
+        var body = document.body, html = document.documentElement;
+        return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    };
+    return Utils;
+})();
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
 @ Date : 16/02/2015
 @ Date update: 16/02/2015
 @ Update by: @yonax73  | yonax73@gmail.com
@@ -54,6 +71,9 @@ var Popup = (function () {
     Popup.prototype.getMask = function () {
         if (this.mask === null) {
             this.mask = document.getElementsByClassName(this.maskClass)[0];
+        }
+        if (this.mask !== null) {
+            this.mask.style.height = Utils.getWindowMaxHeight() + 'px';
         }
     };
     return Popup;

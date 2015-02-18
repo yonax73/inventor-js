@@ -63,3 +63,140 @@
 .i-checkbox.i-checkbox-danger label::before {
     color: @checkbox-danger-color;
 }
+
+//Toolbar checkboxes
+// Base class checkbox button toolbar style
+.i-checkbox.i-checkbox-toolbar label {
+    display: table-cell;
+    padding: 1em;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    vertical-align: baseline;
+    border: 1px solid #c4c4c4;
+}
+//icon control normal state
+// -------------------------
+.i-checkbox.i-checkbox-toolbar input[type="checkbox"] + label::before {
+    font-size: 85%;
+    content: "\f00c";
+    opacity: 0;
+}
+//icon control checck state
+// -------------------------
+.i-checkbox.i-checkbox-toolbar input[type="checkbox"]:checked + label::before {
+    font-size: 85%;
+    content: "\f00c";
+    opacity: 1;
+}
+//checkbox button toolbar  horizontal orientation
+
+.form-group.i-checkbox-horizontal {
+    display: flexbox;
+    display: flex;
+}
+
+.form-group.i-checkbox-horizontal span:first-child label {
+    border-bottom-left-radius: @checkbox-toolbar-border-radius;
+    border-top-left-radius: @checkbox-toolbar-border-radius;
+}
+
+.form-group.i-checkbox-horizontal span label {
+    border-right-width: 0;
+}
+
+.form-group.i-checkbox-horizontal span:last-child label {
+    border-bottom-right-radius: @checkbox-toolbar-border-radius;
+    border-top-right-radius: @checkbox-toolbar-border-radius;
+    border-right-width: 1px;
+}
+//checkbox button toolbar vertical orientation 
+.form-group.i-checkbox-vertical {
+    display: table-caption;
+}
+
+.form-group.i-checkbox-vertical span:first-child label {
+    border-top-right-radius: @checkbox-toolbar-border-radius;
+    border-top-left-radius: @checkbox-toolbar-border-radius;    
+}
+
+.form-group.i-checkbox-vertical span label {
+    border-bottom-width: 0;
+}
+
+.form-group.i-checkbox-vertical span:last-child label {
+    border-bottom-right-radius: @checkbox-toolbar-border-radius;
+    border-bottom-left-radius: @checkbox-toolbar-border-radius;
+    border-top-width: 1px;
+}
+//checkbox button toolbar Contextual  default variation
+//------------------------------------
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-default input[type="checkbox"] + label::before {    
+     color:@checkbox-toolbar-before-default-color;
+}
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-default label {
+    background-color: @checkbox-toolbar-default-bg;  
+    border-color:@checkbox-toolbar-default-border;  
+    color:@checkbox-toolbar-default-color;
+}
+//checkbox button toolbar Contextual  primary variation
+//------------------------------------
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-primary input[type="checkbox"] + label::before {    
+     color:@checkbox-toolbar-before-primary-color;
+}
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-primary label {
+    background-color: @checkbox-toolbar-primary-bg;  
+    border-color:@checkbox-toolbar-primary-border;  
+    color:@checkbox-toolbar-primary-color;
+}
+//checkbox button toolbar Contextual  success variation
+//------------------------------------
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-success input[type="checkbox"] + label::before {    
+     color:@checkbox-toolbar-before-success-color;
+}
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-success label {
+    background-color: @checkbox-toolbar-success-bg;  
+    border-color:@checkbox-toolbar-success-border;  
+    color:@checkbox-toolbar-success-color;
+}
+//checkbox button toolbar Contextual  info variation
+//------------------------------------
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-info input[type="checkbox"] + label::before {    
+     color:@checkbox-toolbar-before-info-color;
+}
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-info label {
+    background-color: @checkbox-toolbar-info-bg;  
+    border-color:@checkbox-toolbar-info-border;  
+    color:@checkbox-toolbar-info-color;
+}
+//checkbox button toolbar Contextual  warning variation
+//------------------------------------
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-warning input[type="checkbox"] + label::before {    
+     color:@checkbox-toolbar-before-warning-color;
+}
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-warning label {
+    background-color: @checkbox-toolbar-warning-bg;  
+    border-color:@checkbox-toolbar-warning-border;  
+    color:@checkbox-toolbar-warning-color;
+}
+//checkbox button toolbar Contextual  danger variation
+//------------------------------------
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-danger input[type="checkbox"] + label::before {    
+     color:@checkbox-toolbar-before-danger-color;
+}
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-danger label {
+    background-color: @checkbox-toolbar-danger-bg;  
+    border-color:@checkbox-toolbar-danger-border;  
+    color:@checkbox-toolbar-danger-color;
+}
+//checkbox button toolbar Contextual  disabled state
+//------------------------------------
+.i-checkbox.i-checkbox-toolbar input[type="checkbox"][disabled]+ label{
+    background-color:@checkbox-toolbar-disabled-bg;
+    border-color:@checkbox-toolbar-disabled-border;  
+    color:@checkbox-toolbar-disabled-color;    
+    cursor: not-allowed;
+}
+.i-checkbox.i-checkbox-toolbar input[type="checkbox"][disabled]+ label::before{
+    color:@checkbox-toolbar-disabled-color;   
+}

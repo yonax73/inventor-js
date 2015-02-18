@@ -1,4 +1,20 @@
-﻿/**
+﻿
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
+@ Date : 18/02/2015
+@ Date update: 16/02/2015
+@ Update by: @yonax73  | yonax73@gmail.com
+@ Description: Utils
+**/
+class Utils {
+
+    static getWindowMaxHeight(): number {
+        var body = document.body,html = document.documentElement;
+        return Math.max(body.scrollHeight, body.offsetHeight,html.clientHeight, html.scrollHeight, html.offsetHeight);
+    }
+}
+/**
 @ Autor :@yonax73 | yonax73@gmail.com
 @ Version: 0.1
 @ Date : 16/02/2015
@@ -9,22 +25,22 @@
 class Popup {
 
     private element: HTMLElement;
-    private mask: HTMLElement; 
+    private mask: HTMLElement;
     private closeBtn: HTMLElement;
     private animationShow: Animation;
     private animationClose: Animation;
-    private maskClass: string;    
-    private closeClass: string;  
+    private maskClass: string;
+    private closeClass: string;
 
     constructor(element: HTMLElement) {
         this.element = element;
-        this.mask = null;  
+        this.mask = null;
         this.closeBtn = null;
         this.animationShow = new Animation('i-ease', 'i-bounce-in-down', 'i-1s', 1000);
         this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-1s', 1000);
-        this.maskClass = 'i-popup-mask';   
-        this.closeClass = 'i-popup-close';  
-        this.init();        
+        this.maskClass = 'i-popup-mask';
+        this.closeClass = 'i-popup-close';
+        this.init();
     }
 
     private init() {
@@ -37,14 +53,14 @@ class Popup {
         }
     }
 
-    public show() {             
+    public show() {
         this.getMask();
         if (this.mask != null) {
             if (this.element.classList.contains('hidden')) {
                 this.mask.classList.remove('hidden');
                 this.mask.classList.add('show');
                 this.element.classList.remove('hidden');
-                this.element.classList.add('show');                
+                this.element.classList.add('show');
                 this.animationShow.run(this.element);
             }
         }
@@ -65,6 +81,9 @@ class Popup {
     private getMask() {
         if (this.mask === null) {
             this.mask = <HTMLElement>document.getElementsByClassName(this.maskClass)[0];
+        }
+        if (this.mask !== null) {
+            this.mask.style.height = Utils.getWindowMaxHeight() + 'px';
         }
     }
 
@@ -318,7 +337,7 @@ class BaseForm {
         var feedBack = this.searchFeedBack(input);
         if (feedBack != null) {
             if (feedBack.classList.contains(this.hasSuccessClass))
-                feedBack.classList.remove(this.hasSuccessClass);            
+                feedBack.classList.remove(this.hasSuccessClass);
             if (!feedBack.classList.contains(this.hasErrorClass))
                 feedBack.classList.add(this.hasErrorClass)
             this.showFormErrorMsg(feedBack);
@@ -474,10 +493,10 @@ class BaseForm {
         }
     }
 
-    protected showIcon(feedBack: HTMLElement,icon:string) {
+    protected showIcon(feedBack: HTMLElement, icon: string) {
         var contentIcon: HTMLElement = <HTMLElement>feedBack.getElementsByClassName(this.formControlFeedBackClass)[0];
         if (contentIcon != null) {
-            var className = icon+ ' ' + this.formControlFeedBackClass;
+            var className = icon + ' ' + this.formControlFeedBackClass;
             contentIcon.className = className;
         }
     }   

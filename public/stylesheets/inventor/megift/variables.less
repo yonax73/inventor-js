@@ -893,12 +893,52 @@
 
 @checkbox-warning-color: @brand-warning;           
 
-@checkbox-danger-color: @brand-danger;           
+@checkbox-danger-color: @brand-danger;    
+
+//== Toolbar Checkboxes
+//
+//##
+@checkbox-toolbar-border-radius :              @border-radius-base;
+
+@checkbox-toolbar-disabled-bg:                  @gray-lighter;
+@checkbox-toolbar-disabled-border:              darken(@checkbox-toolbar-disabled-bg,5%);
+@checkbox-toolbar-disabled-color:               @gray-light;
+@checkbox-toolbar-before-disabled-color:        @checkbox-toolbar-disabled-color;
+
+@checkbox-toolbar-default-bg:                  #fff;
+@checkbox-toolbar-default-border:              darken(@checkbox-toolbar-default-bg,30%);
+@checkbox-toolbar-default-color:               #555;
+@checkbox-toolbar-before-default-color:        @checkbox-toolbar-default-color;
+
+@checkbox-toolbar-primary-bg:                  @brand-primary;
+@checkbox-toolbar-primary-border:              darken(@checkbox-toolbar-primary-bg,5%);
+@checkbox-toolbar-primary-color:               #fff;
+@checkbox-toolbar-before-primary-color:        @checkbox-toolbar-primary-color;
+
+@checkbox-toolbar-success-bg:                  @brand-success;
+@checkbox-toolbar-success-border:              darken(@checkbox-toolbar-success-bg,5%);
+@checkbox-toolbar-success-color:               #fff;
+@checkbox-toolbar-before-success-color:        @checkbox-toolbar-success-color;
+
+@checkbox-toolbar-info-bg:                    @brand-info;
+@checkbox-toolbar-info-border:                darken(@checkbox-toolbar-info-bg,5%);
+@checkbox-toolbar-info-color:                 #fff;
+@checkbox-toolbar-before-info-color:          @checkbox-toolbar-info-color;
+
+@checkbox-toolbar-warning-bg:                 @brand-warning;
+@checkbox-toolbar-warning-border:             darken(@checkbox-toolbar-warning-bg,5%);
+@checkbox-toolbar-warning-color:              #fff;
+@checkbox-toolbar-before-warning-color:       @checkbox-toolbar-warning-color;
+
+@checkbox-toolbar-danger-bg:                  @brand-danger;
+@checkbox-toolbar-danger-border:              darken(@checkbox-toolbar-danger-bg,5%);
+@checkbox-toolbar-danger-color:               #fff;
+@checkbox-toolbar-before-danger-color:        @checkbox-toolbar-danger-color;       
 
 //== Radio buttons controls
 //
 //##
-@radio-toolbar-border-radius :              0;
+@radio-toolbar-border-radius :              @border-radius-base;
 
 @radio-toolbar-disabled-bg:                  @gray-lighter;
 @radio-toolbar-disabled-border:              darken(@radio-toolbar-disabled-bg,5%);
@@ -907,7 +947,7 @@
 
 @radio-toolbar-default-bg:                  #fff;
 @radio-toolbar-default-border:              darken(@radio-toolbar-default-bg,30%);
-@radio-toolbar-default-color:               #000;
+@radio-toolbar-default-color:               #555;
 @radio-toolbar-before-default-color:        @radio-toolbar-default-color;
 
 @radio-toolbar-primary-bg:                  @brand-primary;
