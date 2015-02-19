@@ -34,7 +34,7 @@ class XHR {
                 if (this.status === EHttpStatus.OK) {
                     if (onReady) onReady(this);
                 } else {
-                    if (onerror) onError();
+                    if (onerror) onError(this);
                 }
             }
         }

@@ -41,7 +41,7 @@ var XHR = (function () {
                 }
                 else {
                     if (onerror)
-                        onError();
+                        onError(this);
                 }
             }
         };
@@ -1024,3 +1024,4 @@ var inventorjs_author = 'Yonatan Alexis Quintero Rodriguez';
 var inventorjs_version = '0.1';
 var inventorjs_email = 'yonax73@gmail.com';
 var inventorjs_twitter = '@yonax73';
+//# sourceMappingURL=Inventor.js.map
