@@ -8,7 +8,7 @@
 @ Description: XmlHttpRequest
 **/
 class XHR {
-
+    
     static byGet(action, onBeforeSend, onReady, onError?) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {

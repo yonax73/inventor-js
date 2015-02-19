@@ -2,7 +2,97 @@
 @ Autor :@yonax73 | yonax73@gmail.com
 @ Version: 0.1
 @ Date : 18/02/2015
-@ Date update: 16/02/2015
+@ Date update: 18/02/2015
+@ Update by: @yonax73  | yonax73@gmail.com
+@ Description: XmlHttpRequest
+**/
+var XHR = (function () {
+    function XHR() {
+    }
+    XHR.byGet = function (action, onBeforeSend, onReady, onError) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (onBeforeSend)
+                onBeforeSend();
+            if (this.readyState === 4 /* COMPLETED */) {
+                if (this.status === 200 /* OK */) {
+                    if (onReady)
+                        onReady(this);
+                }
+                else {
+                    if (onerror)
+                        onError();
+                }
+            }
+        };
+        xhr.open('GET', action);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.send();
+    };
+    XHR.byPost = function (data, action, onBeforeSend, onReady, onError) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (onBeforeSend)
+                onBeforeSend();
+            if (this.readyState === 4 /* COMPLETED */) {
+                if (this.status === 200 /* OK */) {
+                    if (onReady)
+                        onReady(this);
+                }
+                else {
+                    if (onerror)
+                        onError();
+                }
+            }
+        };
+        xhr.open('POST', action);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.send(data);
+    };
+    XHR.byJSON = function (data, action, onBeforeSend, onReady, onError) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (onBeforeSend)
+                onBeforeSend();
+            if (this.readyState === 4 /* COMPLETED */) {
+                if (this.status === 200 /* OK */) {
+                    if (onReady)
+                        onReady(this);
+                }
+                else {
+                    if (onerror)
+                        onError();
+                }
+            }
+        };
+        xhr.open('POST', action);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(data);
+    };
+    return XHR;
+})();
+var EHttpStatus;
+(function (EHttpStatus) {
+    EHttpStatus[EHttpStatus["OK"] = 200] = "OK";
+    EHttpStatus[EHttpStatus["BAD_REQUEST"] = 400] = "BAD_REQUEST";
+    EHttpStatus[EHttpStatus["UNAUTHORIZED"] = 401] = "UNAUTHORIZED";
+    EHttpStatus[EHttpStatus["FORBIDDEN"] = 403] = "FORBIDDEN";
+    EHttpStatus[EHttpStatus["NOT_FOUND"] = 404] = "NOT_FOUND";
+    EHttpStatus[EHttpStatus["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
+})(EHttpStatus || (EHttpStatus = {}));
+var EReadyStateStatus;
+(function (EReadyStateStatus) {
+    EReadyStateStatus[EReadyStateStatus["UNINITIALIZED"] = 0] = "UNINITIALIZED";
+    EReadyStateStatus[EReadyStateStatus["LOADING"] = 1] = "LOADING";
+    EReadyStateStatus[EReadyStateStatus["LOADED"] = 2] = "LOADED";
+    EReadyStateStatus[EReadyStateStatus["INTERACTIVE"] = 3] = "INTERACTIVE";
+    EReadyStateStatus[EReadyStateStatus["COMPLETED"] = 4] = "COMPLETED";
+})(EReadyStateStatus || (EReadyStateStatus = {}));
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
+@ Date : 18/02/2015
+@ Date update: 18/02/2015
 @ Update by: @yonax73  | yonax73@gmail.com
 @ Description: Utils
 **/
@@ -187,7 +277,7 @@ var BaseForm = (function () {
             case 'textarea':
             case 'password':
                 if (input.dataset.required) {
-                    this.result = Form.isEmpty(input.value) ? this.error(input) : this.success(input); //Check required
+                    this.result = BaseForm.isEmpty(input.value) ? this.error(input) : this.success(input); //Check required
                     if (this.result) {
                         this.generalValidations(input);
                     }
@@ -253,14 +343,14 @@ var BaseForm = (function () {
     };
     BaseForm.prototype.generalValidations = function (input) {
         if (input.dataset.name) {
-            this.result = Form.isFullName(input.value) ? this.success(input) : this.error(input); //Check name
+            this.result = BaseForm.isFullName(input.value) ? this.success(input) : this.error(input); //Check name
         }
         else if (input.dataset.email) {
-            this.result = Form.isEmail(input.value) ? this.success(input) : this.error(input); //Check email
+            this.result = BaseForm.isEmail(input.value) ? this.success(input) : this.error(input); //Check email
         }
         else if (input.dataset.equalsto) {
             var tmpInp = document.getElementsByName(input.dataset.equalsto)[0]; //Check equals to
-            if (Form.isEqualsTo(tmpInp.value, input.value)) {
+            if (BaseForm.isEqualsTo(tmpInp.value, input.value)) {
                 var tmpBool1 = this.success(input);
                 var tmpBool2 = this.success(tmpInp);
                 this.result = tmpBool1 && tmpBool2;
@@ -275,50 +365,50 @@ var BaseForm = (function () {
             }
         }
         else if (input.dataset.money) {
-            this.result = Form.isMoney(input.value) ? this.success(input) : this.error(input); //Check money
+            this.result = BaseForm.isMoney(input.value) ? this.success(input) : this.error(input); //Check money
         }
         else if (input.dataset.maxlength) {
             var length = input.dataset.maxlength;
-            this.result = Form.maxLength(input.value, length) ? this.success(input) : this.error(input);
+            this.result = BaseForm.maxLength(input.value, length) ? this.success(input) : this.error(input);
         }
         else if (input.dataset.minlength) {
             var length = input.dataset.minlength;
-            this.result = Form.minLength(input.value, length) ? this.success(input) : this.error(input); //Check min length
+            this.result = BaseForm.minLength(input.value, length) ? this.success(input) : this.error(input); //Check min length
         }
         else if (input.dataset.rangelength) {
             var data = input.dataset.rangelength.split("-");
             var min = data[0];
             var max = data[1];
-            this.result = Form.rangeLength(input.value, min, max) ? this.success(input) : this.error(input); //Check range length
+            this.result = BaseForm.rangeLength(input.value, min, max) ? this.success(input) : this.error(input); //Check range length
         }
         else if (input.dataset.max) {
             var max = input.dataset.max;
-            this.result = Form.max(input.value, max) ? this.success(input) : this.error(input); //Check max number
+            this.result = BaseForm.max(input.value, max) ? this.success(input) : this.error(input); //Check max number
         }
         else if (input.dataset.min) {
             var min = input.dataset.min;
-            this.result = Form.min(input.value, min) ? this.success(input) : this.error(input); //Check min number
+            this.result = BaseForm.min(input.value, min) ? this.success(input) : this.error(input); //Check min number
         }
         else if (input.dataset.range) {
             var data = input.dataset.range.split("-");
             var min = data[0];
             var max = data[1];
-            this.result = Form.range(input.value, min, max) ? this.success(input) : this.error(input); //Check range number
+            this.result = BaseForm.range(input.value, min, max) ? this.success(input) : this.error(input); //Check range number
         }
         else if (input.dataset.url) {
-            this.result = Form.isURL(input.value) ? this.success(input) : this.error(input); //Check URL
+            this.result = BaseForm.isURL(input.value) ? this.success(input) : this.error(input); //Check URL
         }
         else if (input.dataset.date) {
-            this.result = Form.isDate(input.value) ? this.success(input) : this.error(input); //Check date
+            this.result = BaseForm.isDate(input.value) ? this.success(input) : this.error(input); //Check date
         }
         else if (input.dataset.number) {
-            this.result = Form.isNumber(input.value) ? this.success(input) : this.error(input); //Check number
+            this.result = BaseForm.isNumber(input.value) ? this.success(input) : this.error(input); //Check number
         }
         else if (input.dataset.creditcard) {
-            this.result = Form.isCreditCard(input.value) ? this.success(input) : this.error(input); //Check credit card
+            this.result = BaseForm.isCreditCard(input.value) ? this.success(input) : this.error(input); //Check credit card
         }
         else if (input.dataset.option) {
-            this.result = Form.isValidOption(input, input.dataset.option) ? this.success(input) : this.error(input); //Check UI-Select Option
+            this.result = BaseForm.isValidOption(input, input.dataset.option) ? this.success(input) : this.error(input); //Check UI-Select Option
         }
         else {
             this.success(input);
@@ -934,4 +1024,3 @@ var inventorjs_author = 'Yonatan Alexis Quintero Rodriguez';
 var inventorjs_version = '0.1';
 var inventorjs_email = 'yonax73@gmail.com';
 var inventorjs_twitter = '@yonax73';
-//# sourceMappingURL=Inventor.js.map
