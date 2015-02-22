@@ -113,7 +113,7 @@ class Popup {
         this.mask = null;
         this.closeBtn = null;
         this.animationShow = new Animation('i-ease', 'i-bounce-in-down', 'i-1s', 1000);
-        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-0-1s', 100);
+        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-1s', 1000);
         this.maskClass = 'i-popup-mask';
         this.closeClass = 'i-popup-close';
         this.init();
@@ -142,12 +142,21 @@ class Popup {
         }
     }
 
-    public close() {
+    public closeAll() {
         this.getMask();
         if (this.element.classList.contains('show')) {
             this.animationClose.run(this.element,() => {
                 this.mask.classList.remove('show');
                 this.mask.classList.add('hidden');
+                this.element.classList.remove('show');
+                this.element.classList.add('hidden');
+            });
+        }
+    }
+
+    public close() {        
+        if (this.element.classList.contains('show')) {
+            this.animationClose.run(this.element,() => {
                 this.element.classList.remove('show');
                 this.element.classList.add('hidden');
             });

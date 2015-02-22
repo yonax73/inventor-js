@@ -119,7 +119,7 @@ var Popup = (function () {
         this.mask = null;
         this.closeBtn = null;
         this.animationShow = new Animation('i-ease', 'i-bounce-in-down', 'i-1s', 1000);
-        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-0-1s', 100);
+        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-1s', 1000);
         this.maskClass = 'i-popup-mask';
         this.closeClass = 'i-popup-close';
         this.init();
@@ -146,13 +146,22 @@ var Popup = (function () {
             }
         }
     };
-    Popup.prototype.close = function () {
+    Popup.prototype.closeAll = function () {
         var _this = this;
         this.getMask();
         if (this.element.classList.contains('show')) {
             this.animationClose.run(this.element, function () {
                 _this.mask.classList.remove('show');
                 _this.mask.classList.add('hidden');
+                _this.element.classList.remove('show');
+                _this.element.classList.add('hidden');
+            });
+        }
+    };
+    Popup.prototype.close = function () {
+        var _this = this;
+        if (this.element.classList.contains('show')) {
+            this.animationClose.run(this.element, function () {
                 _this.element.classList.remove('show');
                 _this.element.classList.add('hidden');
             });
