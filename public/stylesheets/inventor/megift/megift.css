@@ -5784,11 +5784,11 @@ button.close {
 }
 .i-checkbox.i-checkbox-toolbar.i-checkbox-left input[type="checkbox"] + label::before {
   float: left;
-  padding: 0 0.6em 0 0;
+  padding: 0 0.2em 0 0;
 }
 .i-checkbox.i-checkbox-toolbar.i-checkbox-right input[type="checkbox"] + label::after {
   float: right;
-  padding: 0 0 0 0.6em;
+  padding: 0 0 0 0.2em;
 }
 .i-checkbox.i-checkbox-toolbar.i-checkbox-left > .i-checkbox-toolbar-label,
 .i-checkbox.i-checkbox-toolbar.i-checkbox-right > .i-checkbox-toolbar-label {
@@ -5798,12 +5798,12 @@ button.close {
 .i-checkbox.i-checkbox-toolbar.i-checkbox-left > .i-checkbox-toolbar-label:after {
   content: "\00a0 ";
   float: right;
-  padding: 0 0 0 0.6em;
+  padding: 0 0 0 0.2em;
 }
 .i-checkbox.i-checkbox-toolbar.i-checkbox-right > .i-checkbox-toolbar-label:before {
   content: "\00a0 ";
   float: left;
-  padding: 0 0.6em 0 0;
+  padding: 0 0.2em 0 0;
 }
 .i-checkbox-horizontal > .i-checkbox.i-checkbox-toolbar label {
   display: inline-block;
@@ -5974,11 +5974,11 @@ button.close {
 }
 .i-radio.i-radio-toolbar.i-radio-left input[type="radio"] + label::before {
   float: left;
-  padding: 0 0.6em 0 0;
+  padding: 0 0.02em 0 0;
 }
 .i-radio.i-radio-toolbar.i-radio-right input[type="radio"] + label::after {
   float: right;
-  padding: 0 0 0 0.6em;
+  padding: 0 0 0 0.02em;
 }
 .i-radio.i-radio-toolbar.i-radio-left > .i-radio-toolbar-label,
 .i-radio.i-radio-toolbar.i-radio-right > .i-radio-toolbar-label {
@@ -5988,12 +5988,12 @@ button.close {
 .i-radio.i-radio-toolbar.i-radio-left > .i-radio-toolbar-label:after {
   content: "\00a0 ";
   float: right;
-  padding: 0 0 0 0.6em;
+  padding: 0 0 0 0.02em;
 }
 .i-radio.i-radio-toolbar.i-radio-right > .i-radio-toolbar-label:before {
   content: "\00a0 ";
   float: left;
-  padding: 0 0.6em 0 0;
+  padding: 0 0.02em 0 0;
 }
 .i-radio-horizontal > .i-radio.i-radio-toolbar label {
   display: inline-block;

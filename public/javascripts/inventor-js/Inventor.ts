@@ -113,7 +113,7 @@ class Popup {
         this.mask = null;
         this.closeBtn = null;
         this.animationShow = new Animation('i-ease', 'i-bounce-in-down', 'i-1s', 1000);
-        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-0-2s', 200);
+        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-0-1s', 100);
         this.maskClass = 'i-popup-mask';
         this.closeClass = 'i-popup-close';
         this.init();

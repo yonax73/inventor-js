@@ -1265,6 +1265,10 @@ SOFTWARE.*/
     -webkit-animation-timing-function: linear; 
     animation-timing-function: linear;	
 }
+.i-0-1s{
+	-webkit-animation-duration: 0.1s; 
+    animation-duration: 0.1s;	
+}
 .i-0-2s{
 	-webkit-animation-duration: 0.2s; 
     animation-duration: 0.2s;	
