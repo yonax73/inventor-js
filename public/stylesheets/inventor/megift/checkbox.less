@@ -5,7 +5,8 @@
 // Base class
 // -------------------------
 
-.i-checkbox input[type="checkbox"] + label::before {
+.i-checkbox input[type="checkbox"] + label::before,
+.i-checkbox input[type="checkbox"] + label::after {
     font-family: FontAwesome;
     font-size: 2em;
     font-weight: normal;
@@ -20,6 +21,7 @@
 .i-checkbox input[type="checkbox"][disabled] + label {
     cursor: not-allowed;
 }
+
 .i-checkbox input[type="checkbox"][disabled] + label,
 .i-checkbox input[type="checkbox"][disabled] + label::before {
     color: @checkbox-disabled-color;
@@ -34,7 +36,7 @@
 .i-checkbox.i-checkbox-f input[type="checkbox"] + label::before {
     content: "\f0c8";
 }
-//icon control checck state
+//icon control check state
 .i-checkbox.i-checkbox-f input[type="checkbox"]:checked + label::before {
     content: "\f14a";
 }
@@ -66,34 +68,77 @@
 
 //Toolbar checkboxes
 // Base class checkbox button toolbar style
-.i-checkbox.i-checkbox-toolbar label {
-    display: table-cell;
+//-----------------------------------
+.i-checkbox.i-checkbox-toolbar label {  
     padding: 1em;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 1;
-    text-align: center;
     vertical-align: baseline;
+    text-align: left;
     border: 1px solid #c4c4c4;
+    width: 100%;
 }
 //icon control normal state
 // -------------------------
-.i-checkbox.i-checkbox-toolbar input[type="checkbox"] + label::before {
-    font-size: 85%;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-left input[type="checkbox"] + label::before,
+.i-checkbox.i-checkbox-toolbar.i-checkbox-right input[type="checkbox"] + label::after {
     content: "\f00c";
+    font-size: 100%;
     opacity: 0;
 }
-//icon control checck state
+//icon control check state
 // -------------------------
-.i-checkbox.i-checkbox-toolbar input[type="checkbox"]:checked + label::before {
-    font-size: 85%;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-left input[type="checkbox"]:checked + label::before,
+.i-checkbox.i-checkbox-toolbar.i-checkbox-right input[type="checkbox"]:checked + label::after {
     content: "\f00c";
+    font-size: 100%;
     opacity: 1;
 }
-//checkbox button toolbar  horizontal orientation
+//icon align left
+//----------------
+
+.i-checkbox.i-checkbox-toolbar.i-checkbox-left input[type="checkbox"] + label::before {
+    float: left;
+    padding: 0 0.6em 0 0;
+}
+//icon align right
+//-----------------
+
+.i-checkbox.i-checkbox-toolbar.i-checkbox-right input[type="checkbox"] + label::after {
+    float: right;
+    padding: 0 0 0 0.6em;
+}
+//checkbox toolbar label
+//-----------------------
+.i-checkbox.i-checkbox-toolbar.i-checkbox-left > .i-checkbox-toolbar-label,
+.i-checkbox.i-checkbox-toolbar.i-checkbox-right > .i-checkbox-toolbar-label {
+    text-align: right;
+    font-weight:bold;
+}
+
+.i-checkbox.i-checkbox-toolbar.i-checkbox-left > .i-checkbox-toolbar-label:after {
+    content: "\00a0 ";
+    float: right;
+    padding: 0 0 0 0.6em;
+}
+
+.i-checkbox.i-checkbox-toolbar.i-checkbox-right > .i-checkbox-toolbar-label:before {
+    content: "\00a0 ";
+    float: left;
+    padding: 0 0.6em 0 0;
+}
+//checkbox  toolbar  horizontal orientation
+//------------------------------------------------
+.i-checkbox-horizontal>.i-checkbox.i-checkbox-toolbar label{
+    display:inline-block;
+}
 
 .form-group.i-checkbox-horizontal {
-    display: flexbox;
     display: flex;
+}
+
+.form-group.i-checkbox-horizontal span {    
+    width: 100%;
 }
 
 .form-group.i-checkbox-horizontal span:first-child label {
@@ -110,14 +155,24 @@
     border-top-right-radius: @checkbox-toolbar-border-radius;
     border-right-width: 1px;
 }
-//checkbox button toolbar vertical orientation 
+
+//checkbox  toolbar vertical orientation
+//-----------------------------------------------
+.i-checkbox-vertical > .i-checkbox.i-checkbox-toolbar label{
+    display:table-cell;
+}
 .form-group.i-checkbox-vertical {
-    display: table-caption;
+    display: inline;
+}
+
+.form-group.i-checkbox-vertical span {
+    display: inline-table;
+    width: 100%;
 }
 
 .form-group.i-checkbox-vertical span:first-child label {
     border-top-right-radius: @checkbox-toolbar-border-radius;
-    border-top-left-radius: @checkbox-toolbar-border-radius;    
+    border-top-left-radius: @checkbox-toolbar-border-radius;
 }
 
 .form-group.i-checkbox-vertical span label {
@@ -128,75 +183,84 @@
     border-bottom-right-radius: @checkbox-toolbar-border-radius;
     border-bottom-left-radius: @checkbox-toolbar-border-radius;
     border-top-width: 1px;
+    border-bottom-width: 1px;
 }
 //checkbox button toolbar Contextual  default variation
 //------------------------------------
-.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-default input[type="checkbox"] + label::before {    
-     color:@checkbox-toolbar-before-default-color;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-default input[type="checkbox"] + label::before {
+    color: @checkbox-toolbar-before-default-color;
 }
+
 .i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-default label {
-    background-color: @checkbox-toolbar-default-bg;  
-    border-color:@checkbox-toolbar-default-border;  
-    color:@checkbox-toolbar-default-color;
+    background-color: @checkbox-toolbar-default-bg;
+    border-color: @checkbox-toolbar-default-border;
+    color: @checkbox-toolbar-default-color;
 }
 //checkbox button toolbar Contextual  primary variation
 //------------------------------------
-.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-primary input[type="checkbox"] + label::before {    
-     color:@checkbox-toolbar-before-primary-color;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-primary input[type="checkbox"] + label::before {
+    color: @checkbox-toolbar-before-primary-color;
 }
+
 .i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-primary label {
-    background-color: @checkbox-toolbar-primary-bg;  
-    border-color:@checkbox-toolbar-primary-border;  
-    color:@checkbox-toolbar-primary-color;
+    background-color: @checkbox-toolbar-primary-bg;
+    border-color: @checkbox-toolbar-primary-border;
+    color: @checkbox-toolbar-primary-color;
 }
 //checkbox button toolbar Contextual  success variation
 //------------------------------------
-.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-success input[type="checkbox"] + label::before {    
-     color:@checkbox-toolbar-before-success-color;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-success input[type="checkbox"] + label::before {
+    color: @checkbox-toolbar-before-success-color;
 }
+
 .i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-success label {
-    background-color: @checkbox-toolbar-success-bg;  
-    border-color:@checkbox-toolbar-success-border;  
-    color:@checkbox-toolbar-success-color;
+    background-color: @checkbox-toolbar-success-bg;
+    border-color: @checkbox-toolbar-success-border;
+    color: @checkbox-toolbar-success-color;
 }
 //checkbox button toolbar Contextual  info variation
 //------------------------------------
-.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-info input[type="checkbox"] + label::before {    
-     color:@checkbox-toolbar-before-info-color;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-info input[type="checkbox"] + label::before {
+    color: @checkbox-toolbar-before-info-color;
 }
+
 .i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-info label {
-    background-color: @checkbox-toolbar-info-bg;  
-    border-color:@checkbox-toolbar-info-border;  
-    color:@checkbox-toolbar-info-color;
+    background-color: @checkbox-toolbar-info-bg;
+    border-color: @checkbox-toolbar-info-border;
+    color: @checkbox-toolbar-info-color;
 }
 //checkbox button toolbar Contextual  warning variation
 //------------------------------------
-.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-warning input[type="checkbox"] + label::before {    
-     color:@checkbox-toolbar-before-warning-color;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-warning input[type="checkbox"] + label::before {
+    color: @checkbox-toolbar-before-warning-color;
 }
+
 .i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-warning label {
-    background-color: @checkbox-toolbar-warning-bg;  
-    border-color:@checkbox-toolbar-warning-border;  
-    color:@checkbox-toolbar-warning-color;
+    background-color: @checkbox-toolbar-warning-bg;
+    border-color: @checkbox-toolbar-warning-border;
+    color: @checkbox-toolbar-warning-color;
 }
 //checkbox button toolbar Contextual  danger variation
 //------------------------------------
-.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-danger input[type="checkbox"] + label::before {    
-     color:@checkbox-toolbar-before-danger-color;
+.i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-danger input[type="checkbox"] + label::before {
+    color: @checkbox-toolbar-before-danger-color;
 }
+
 .i-checkbox.i-checkbox-toolbar.i-checkbox-toolbar-danger label {
-    background-color: @checkbox-toolbar-danger-bg;  
-    border-color:@checkbox-toolbar-danger-border;  
-    color:@checkbox-toolbar-danger-color;
+    background-color: @checkbox-toolbar-danger-bg;
+    border-color: @checkbox-toolbar-danger-border;
+    color: @checkbox-toolbar-danger-color;
 }
 //checkbox button toolbar Contextual  disabled state
 //------------------------------------
-.i-checkbox.i-checkbox-toolbar input[type="checkbox"][disabled]+ label{
-    background-color:@checkbox-toolbar-disabled-bg;
-    border-color:@checkbox-toolbar-disabled-border;  
-    color:@checkbox-toolbar-disabled-color;    
+.i-checkbox.i-checkbox-toolbar input[type="checkbox"][disabled] + label {
+    background-color: @checkbox-toolbar-disabled-bg;
+    border-color: @checkbox-toolbar-disabled-border;
+    color: @checkbox-toolbar-disabled-color;
     cursor: not-allowed;
 }
-.i-checkbox.i-checkbox-toolbar input[type="checkbox"][disabled]+ label::before{
-    color:@checkbox-toolbar-disabled-color;   
+
+.i-checkbox.i-checkbox-toolbar input[type="checkbox"][disabled] + label::before,
+.i-checkbox.i-checkbox-toolbar input[type="checkbox"][disabled] + label::after {
+    color: @checkbox-toolbar-disabled-color;
 }
