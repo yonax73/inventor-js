@@ -119,7 +119,7 @@ var Popup = (function () {
         this.mask = null;
         this.closeBtn = null;
         this.animationShow = new Animation('i-ease', 'i-bounce-in-down', 'i-1s', 1000);
-        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-1s', 1000);
+        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-0-2s', 200);
         this.maskClass = 'i-popup-mask';
         this.closeClass = 'i-popup-close';
         this.init();
@@ -130,7 +130,7 @@ var Popup = (function () {
         if (this.closeBtn != null) {
             this.closeBtn.onclick = function (e) {
                 e.preventDefault();
-                _this.close();
+                _this.closeAll();
             };
         }
     };
