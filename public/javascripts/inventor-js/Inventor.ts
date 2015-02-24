@@ -8,9 +8,10 @@
 @ Description: XmlHttpRequest
 **/
 class XHR {
-    
-    static byGet(action, onBeforeSend, onReady, onError?) {
+
+    static byGet(action, onBeforeSend, onReady, onError?, _conteType?) {
         var xhr = new XMLHttpRequest();
+        var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
         xhr.onreadystatechange = function () {
             if (onBeforeSend) onBeforeSend();
             if (this.readyState === EReadyStateStatus.COMPLETED) {
@@ -22,12 +23,15 @@ class XHR {
             }
         }
         xhr.open('GET', action);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.setRequestHeader('Content-Type', conteType);
         xhr.send();
     }
-
-    static byPost(data, action, onBeforeSend, onReady, onError?) {
+    /*
+     * ContentType by default is application/x-www-form-urlencoded;charset=UTF-8
+     */
+    static byPost(data, action, onBeforeSend, onReady, onError?,_conteType?) {
         var xhr = new XMLHttpRequest();
+        var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
         xhr.onreadystatechange = function () {
             if (onBeforeSend) onBeforeSend();
             if (this.readyState === EReadyStateStatus.COMPLETED) {
@@ -39,27 +43,10 @@ class XHR {
             }
         }
         xhr.open('POST', action);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.setRequestHeader('Content-Type', conteType);
         xhr.send(data);
     }
-    /*
-     * Send post without request header
-     */
-    static byPostSingle(data, action, onBeforeSend, onReady, onError?) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (onBeforeSend) onBeforeSend();
-            if (this.readyState === EReadyStateStatus.COMPLETED) {
-                if (this.status === EHttpStatus.OK) {
-                    if (onReady) onReady(this);
-                } else {
-                    if (onerror) onError(this);
-                }
-            }
-        }
-        xhr.open('POST', action);       
-        xhr.send(data);
-    }
+
 
     static byJSON(data, action, onBeforeSend, onReady, onError) {
         var xhr = new XMLHttpRequest();
@@ -172,12 +159,10 @@ class Popup {
         }
     }
 
-    public close() {        
+    public close() {
         if (this.element.classList.contains('show')) {
-            this.animationClose.run(this.element,() => {
-                this.element.classList.remove('show');
-                this.element.classList.add('hidden');
-            });
+            this.element.classList.remove('show');
+            this.element.classList.add('hidden');
         }
     }
 

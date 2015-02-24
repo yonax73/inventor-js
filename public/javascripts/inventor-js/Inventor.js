@@ -9,8 +9,9 @@
 var XHR = (function () {
     function XHR() {
     }
-    XHR.byGet = function (action, onBeforeSend, onReady, onError) {
+    XHR.byGet = function (action, onBeforeSend, onReady, onError, _conteType) {
         var xhr = new XMLHttpRequest();
+        var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
         xhr.onreadystatechange = function () {
             if (onBeforeSend)
                 onBeforeSend();
@@ -26,34 +27,15 @@ var XHR = (function () {
             }
         };
         xhr.open('GET', action);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.setRequestHeader('Content-Type', conteType);
         xhr.send();
     };
-    XHR.byPost = function (data, action, onBeforeSend, onReady, onError) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (onBeforeSend)
-                onBeforeSend();
-            if (this.readyState === 4 /* COMPLETED */) {
-                if (this.status === 200 /* OK */) {
-                    if (onReady)
-                        onReady(this);
-                }
-                else {
-                    if (onerror)
-                        onError(this);
-                }
-            }
-        };
-        xhr.open('POST', action);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-        xhr.send(data);
-    };
     /*
-     * Send post without request header
+     * ContentType by default is application/x-www-form-urlencoded;charset=UTF-8
      */
-    XHR.byPostSingle = function (data, action, onBeforeSend, onReady, onError) {
+    XHR.byPost = function (data, action, onBeforeSend, onReady, onError, _conteType) {
         var xhr = new XMLHttpRequest();
+        var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
         xhr.onreadystatechange = function () {
             if (onBeforeSend)
                 onBeforeSend();
@@ -69,6 +51,7 @@ var XHR = (function () {
             }
         };
         xhr.open('POST', action);
+        xhr.setRequestHeader('Content-Type', conteType);
         xhr.send(data);
     };
     XHR.byJSON = function (data, action, onBeforeSend, onReady, onError) {
@@ -181,12 +164,9 @@ var Popup = (function () {
         }
     };
     Popup.prototype.close = function () {
-        var _this = this;
         if (this.element.classList.contains('show')) {
-            this.animationClose.run(this.element, function () {
-                _this.element.classList.remove('show');
-                _this.element.classList.add('hidden');
-            });
+            this.element.classList.remove('show');
+            this.element.classList.add('hidden');
         }
     };
     Popup.prototype.getMask = function () {
