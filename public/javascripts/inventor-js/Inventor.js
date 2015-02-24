@@ -49,6 +49,28 @@ var XHR = (function () {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
         xhr.send(data);
     };
+    /*
+     * Send post without request header
+     */
+    XHR.byPostSingle = function (data, action, onBeforeSend, onReady, onError) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (onBeforeSend)
+                onBeforeSend();
+            if (this.readyState === 4 /* COMPLETED */) {
+                if (this.status === 200 /* OK */) {
+                    if (onReady)
+                        onReady(this);
+                }
+                else {
+                    if (onerror)
+                        onError(this);
+                }
+            }
+        };
+        xhr.open('POST', action);
+        xhr.send(data);
+    };
     XHR.byJSON = function (data, action, onBeforeSend, onReady, onError) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -118,8 +140,8 @@ var Popup = (function () {
         this.element = element;
         this.mask = null;
         this.closeBtn = null;
-        this.animationShow = new Animation('i-ease', 'i-bounce-in-down', 'i-1s', 1000);
-        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-0-2s', 200);
+        this.animationShow = new Animation('i-ease', 'i-bounce-in-down', 'i-2s', 2000);
+        this.animationClose = new Animation('i-ease', 'i-fade-out', 'i-1s', 1000);
         this.maskClass = 'i-popup-mask';
         this.closeClass = 'i-popup-close';
         this.init();
