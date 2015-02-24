@@ -9,6 +9,58 @@
 **/
 class XHR {
 
+    private action;
+    private data;
+    private beforeSend;
+    private ready;
+    private error;
+    private contentType;
+    private method;
+    private xhr: XMLHttpRequest;
+
+    constructor(method, action) {
+        this.method = method;
+        this.action = action;
+        this.xhr = new XMLHttpRequest();
+    }
+
+    public setContentType(contenType) {
+        this.contentType = contenType;
+    }
+
+    public onBeforeSend(beforeSend) {
+        this.beforeSend = beforeSend;
+    }
+
+    public onReady(ready) {
+        this.ready = ready;
+    }
+
+    public onError(error) {
+        this.error = error;
+    }
+
+    public send(data) {
+        this.data = data;
+        var _self = this;
+        this.xhr.onreadystatechange = function () {
+            if (_self.beforeSend) _self.beforeSend();
+            if (this.readyState === EReadyStateStatus.COMPLETED) {
+                if (this.status === EHttpStatus.OK) {
+                    if (_self.ready) _self.ready(this);
+                } else {
+                    if (_self.error) _self.error(this);
+                }
+            }
+        }
+        this.xhr.open(this.method, this.action);
+        if (this.contentType) this.xhr.setRequestHeader('Content-Type', this.contentType);
+        if (this.data) this.xhr.send(data);
+        else this.xhr.send();
+    }
+     /*
+     * ContentType by default is application/x-www-form-urlencoded;charset=UTF-8
+     */
     static byGet(action, onBeforeSend, onReady, onError?, _conteType?) {
         var xhr = new XMLHttpRequest();
         var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
@@ -29,7 +81,7 @@ class XHR {
     /*
      * ContentType by default is application/x-www-form-urlencoded;charset=UTF-8
      */
-    static byPost(data, action, onBeforeSend, onReady, onError?,_conteType?) {
+    static byPost(data, action, onBeforeSend, onReady, onError?, _conteType?) {
         var xhr = new XMLHttpRequest();
         var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
         xhr.onreadystatechange = function () {

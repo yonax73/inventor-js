@@ -7,8 +7,51 @@
 @ Description: XmlHttpRequest
 **/
 var XHR = (function () {
-    function XHR() {
+    function XHR(method, action) {
+        this.method = method;
+        this.action = action;
+        this.xhr = new XMLHttpRequest();
     }
+    XHR.prototype.setContentType = function (contenType) {
+        this.contentType = contenType;
+    };
+    XHR.prototype.onBeforeSend = function (beforeSend) {
+        this.beforeSend = beforeSend;
+    };
+    XHR.prototype.onReady = function (ready) {
+        this.ready = ready;
+    };
+    XHR.prototype.onError = function (error) {
+        this.error = error;
+    };
+    XHR.prototype.send = function (data) {
+        this.data = data;
+        var _self = this;
+        this.xhr.onreadystatechange = function () {
+            if (_self.beforeSend)
+                _self.beforeSend();
+            if (this.readyState === 4 /* COMPLETED */) {
+                if (this.status === 200 /* OK */) {
+                    if (_self.ready)
+                        _self.ready(this);
+                }
+                else {
+                    if (_self.error)
+                        _self.error(this);
+                }
+            }
+        };
+        this.xhr.open(this.method, this.action);
+        if (this.contentType)
+            this.xhr.setRequestHeader('Content-Type', this.contentType);
+        if (this.data)
+            this.xhr.send(data);
+        else
+            this.xhr.send();
+    };
+    /*
+    * ContentType by default is application/x-www-form-urlencoded;charset=UTF-8
+    */
     XHR.byGet = function (action, onBeforeSend, onReady, onError, _conteType) {
         var xhr = new XMLHttpRequest();
         var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
