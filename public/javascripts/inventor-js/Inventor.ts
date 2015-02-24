@@ -99,7 +99,6 @@ class XHR {
         xhr.send(data);
     }
 
-
     static byJSON(data, action, onBeforeSend, onReady, onError) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
