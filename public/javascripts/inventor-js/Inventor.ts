@@ -40,7 +40,7 @@ class XHR {
         this.error = error;
     }
 
-    public send(data) {
+    public send(data?) {
         this.data = data;
         var _self = this;
         this.xhr.onreadystatechange = function () {
