@@ -34,11 +34,11 @@ class IAlert {
     public icoWarning = 'fa-exclamation-triangle';
     public icoDanger = 'fa-times';
     public icoWait = 'fa-circle-o-notch';
-    public animationIn = 'ui-fade-in';
-    public animationOut = 'ui-fade-out';
-    public typeAnimation = 'ui-ease-in-out';
+    public animationIn = 'i-fade-in';
+    public animationOut = 'i-fade-out';
+    public typeAnimation = 'i-ease-in-out';
     private type = 'close';
-    private durationAnimation = 'ui-1s';
+    private durationAnimation = 'i-1s';
 
     constructor(htmlElement: HTMLElement) {
         this.element = htmlElement;
@@ -179,7 +179,7 @@ class IDataTable {
 
     public init() {
         this.icoLoading.className = 'fa fa-spinner fa-spin';
-        this.table.className = 'ui-data-table table table-striped';
+        this.table.className = 'i-data-table table table-striped';
         this.fillTable();
     }
 

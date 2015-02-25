@@ -40,11 +40,11 @@ var IAlert = (function () {
         this.icoWarning = 'fa-exclamation-triangle';
         this.icoDanger = 'fa-times';
         this.icoWait = 'fa-circle-o-notch';
-        this.animationIn = 'ui-fade-in';
-        this.animationOut = 'ui-fade-out';
-        this.typeAnimation = 'ui-ease-in-out';
+        this.animationIn = 'i-fade-in';
+        this.animationOut = 'i-fade-out';
+        this.typeAnimation = 'i-ease-in-out';
         this.type = 'close';
-        this.durationAnimation = 'ui-1s';
+        this.durationAnimation = 'i-1s';
         this.element = htmlElement;
         this.element.className = 'hidden';
         this.button.className = 'close';
@@ -167,7 +167,7 @@ var IDataTable = (function () {
     }
     IDataTable.prototype.init = function () {
         this.icoLoading.className = 'fa fa-spinner fa-spin';
-        this.table.className = 'ui-data-table table table-striped';
+        this.table.className = 'i-data-table table table-striped';
         this.fillTable();
     };
     IDataTable.prototype.fillTable = function () {
