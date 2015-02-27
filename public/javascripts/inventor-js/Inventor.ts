@@ -2,6 +2,28 @@
 /**
 @ Autor :@yonax73 | yonax73@gmail.com
 @ Version: 0.1
+@ Date : 27/02/2015
+@ Date update: 27/02/2015
+@ Update by: @yonax73  | yonax73@gmail.com
+@ Description: state
+**/
+class State {
+    public old = null;
+    public current = null;
+
+    constructor(old?, current?) {
+        if (old) this.old = old;
+        if (current) this.current = current;
+    }
+
+    public exchange(value) {
+        this.old = this.current;
+        this.current = value;
+    }
+}
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
 @ Date : 18/02/2015
 @ Date update: 18/02/2015
 @ Update by: @yonax73  | yonax73@gmail.com

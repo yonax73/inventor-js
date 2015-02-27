@@ -7,8 +7,11 @@
     <meta name="description" content="Megift Theme Template By Inventorjs">
     <meta name="author" content="Yonatan Alexis Quintero Rodriguez | @yonax73 | yonax73@gmail.com">
     <link rel="icon" href="../../favicon.ico">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">    
+    <link href="../animations.min.css" rel="stylesheet" />
     <link href="megift.min.css" rel="stylesheet" />
+    <script src="../../../javascripts/inventor-js/Inventor.min.js"></script>
+    <script src="../../../javascripts/inventor-js/InventorWeb.min.js"></script>
     <title>Megift Theme Template By Inventorjs</title>
 
 </head>
@@ -98,6 +101,48 @@
             <button type="button" class="btn btn-xs btn-link">Link</button>
         </p>
 
+        <div class="page-header">
+            <h1>Select</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div id="select-items-example" class="i-select i-select-lg i-select-dafault"></div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <button type="button" id="btnSelectGetOption" class="btn btn-primary btn-block">Get option</button>
+                <button type="button" id="btnSelectGetValue" class="btn btn-primary btn-block">Get value</button>
+                <div class="checkbox pull-right">
+                    <label>
+                        <input type="checkbox" value="disabled" id="chkSelectDisabled">
+                        Disabled
+                    </label>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            var items = new ISelect(document.getElementById('select-items-example'), [
+                { option: 1, value: 'item 1' },
+                { option: 2, value: 'item 2' },
+                { option: 3, value: 'item 3' },
+                { option: 4, value: 'item 4', selected: true },
+                { option: 5, value: 'item 5' }
+            ]);
+            document.getElementById('btnSelectGetOption').onclick = function () {
+                if (!items.isDisabled())
+                    alert('Option is: ' + items.getOption());
+            }
+            document.getElementById('btnSelectGetValue').onclick = function () {
+                if (!items.isDisabled())
+                    alert('Value is: ' + items.getValue());
+            }
+            document.getElementById('chkSelectDisabled').onclick = function () {
+                items.setDisabled(this.checked);
+            }
+        </script>
         <div class="page-header">
             <h1>Checkbox</h1>
         </div>
@@ -873,5 +918,7 @@
     <script src="../../assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
 </body>
 </html>

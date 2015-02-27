@@ -1,6 +1,29 @@
 /**
 @ Autor :@yonax73 | yonax73@gmail.com
 @ Version: 0.1
+@ Date : 27/02/2015
+@ Date update: 27/02/2015
+@ Update by: @yonax73  | yonax73@gmail.com
+@ Description: state
+**/
+var State = (function () {
+    function State(old, current) {
+        this.old = null;
+        this.current = null;
+        if (old)
+            this.old = old;
+        if (current)
+            this.current = current;
+    }
+    State.prototype.exchange = function (value) {
+        this.old = this.current;
+        this.current = value;
+    };
+    return State;
+})();
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
 @ Date : 18/02/2015
 @ Date update: 18/02/2015
 @ Update by: @yonax73  | yonax73@gmail.com

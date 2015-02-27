@@ -1,0 +1,107 @@
+﻿// Select by Inventorjs | @yonax73 | yonax73@gmail.com | Create 02-27-2015 | update 02-27-2015 by @yonax73
+// --------------------------------------------------
+
+
+// Base class
+// -------------------------
+.i-select-mask {
+	background: none repeat scroll 0 0 transparent;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.i-select {
+	position: relative;
+	cursor: default;
+}
+
+.i-select .has-feedback .form-control-feedback {
+	top: 0;
+}
+
+.i-select .has-i-icon .form-control,
+.i-select .has-i-image .form-control{
+    padding-left:40px;
+}
+
+.has-i-icon .form-control-i-icon,
+.has-i-image .form-control-i-image {
+  display: block;
+  height: 34px;
+  left: 3px;
+  line-height: 34px;
+  position: absolute;
+  text-align: center;  
+  top:0;
+  width: 34px;
+}
+.has-i-image .form-control-i-image {
+  padding:0.2em;
+}
+
+.i-select .i-image-lu li {
+  padding-left: 0.2em;
+  padding-top: 0.2em;
+}
+
+.i-image-item {
+  height: 48px;
+  margin-right: 0.5em;
+  width: 48px;
+}
+
+.i-select .form-group {
+	margin-bottom: 0;
+}
+
+.i-select ul {
+	
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;	
+	display: none;
+	height: auto;
+	list-style: outside none none;
+	margin: 0;
+	min-height: 80px;
+	overflow: auto;
+	padding: 0;
+	position: absolute;	
+	width: 100%;
+	z-index: 999;
+}
+
+.i-select-items i.fa-li{  
+  left:-0.5em;
+  position: relative;
+  text-align: center;
+  width: 2.14286em;
+} 
+
+.i-select ul.open {
+	display: list-item;
+}
+
+.i-select li {
+	padding-bottom: 0.15em;
+    padding-left:0.8em;
+}
+//read only
+.i-select.disabled,.i-select.read-only {
+	cursor: not-allowed;
+}
+
+// Contextual variations
+//------------------------------------
+.i-select.i-select-dafault li:hover {
+	background-color: @select-default-bg-hover; 
+	color: @select-default-color-hover; 
+}
+.i-select.i-select-dafault ul {
+    background-color: @select-default-bg;
+    border-color: @select-default-border-color; 
+}
+
+

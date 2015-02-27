@@ -1,4 +1,535 @@
-﻿/**
+﻿
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
+@ Date : 27/02/2015
+@ Date update: 27/02/2015
+@ Update by: @yonax73  | yonax73@gmail.com
+@ Description: select
+**/
+enum ETypeSelect {
+    SIMPLE,
+    ICON,
+    IMAGE
+}
+class ISelect {
+
+    private formGroup = document.createElement('div');
+    private hidden = document.createElement('input');
+    private input: any = document.createElement('input');
+    private mask = document.createElement('div');
+    private ico = document.createElement('i');
+    private icoItem: HTMLElement;
+    private imgItem: HTMLImageElement;
+    private items = document.createElement('ul');
+    private element: HTMLElement = null;
+    private open = false;
+    private disabled = false;
+    private readOnly = false;
+    private data: Array<any> = null;
+    private length = 0;
+    private icono = 'fa-angle-down';
+    private animaIn: Animation;
+    private animaOut: Animation;
+    private type = ETypeSelect.SIMPLE;
+    private options = null;
+    private itemSate: State;
+    private itemIconState: State;
+    private itemImageState: State;
+    private inputLgClass = 'i-select-lg';
+
+    constructor(htmlElement: HTMLElement, data, options) {
+        this.element = htmlElement;
+        this.data = data;
+        if (options) this.setOptions(options);
+        this.animaIn = new Animation('i-ease', 'i-flip-in-x', 'i-2s', 200);
+        this.animaOut = new Animation('i-ease', 'i-flip-out-x', 'i-0-2s', 200);
+        this.itemSate = new State();
+        this.formGroup.className = 'form-group  has-feedback';
+        this.hidden.type = 'hidden';
+        if (this.element.getAttribute('data-name')) this.hidden.name = this.element.getAttribute('data-name');
+        this.formGroup.appendChild(this.hidden);
+        this.input.type = 'text';
+        this.input.className = 'form-control';
+        if (this.element.classList.contains(this.inputLgClass)) this.input.classList.add('input-lg');
+        this.input.onchange = () => { return true; }
+        this.input.onkeyup = (e) => {
+            if (e) {
+                if (e.keyCode == 13) this.toggle();
+                if (e.keyCode == 38) this.previous();
+                if (e.keyCode == 40) this.next();
+            }
+        };
+        this.input.onkeydown = (e) => {
+            if (e) {
+                if (e.keyCode != 9 && e.keyCode != 13 && e.keyCode != 16 &&
+                    e.keyCode != 17 && !(e.keyCode >= 38 && e.keyCode <= 40)) {
+                    e.preventDefault();
+                }
+            }
+        };
+        this.formGroup.appendChild(this.input);
+        this.mask.className = 'i-select-mask';
+        this.mask.onclick = (e) => {
+            this.toggle();
+            e.stopPropagation();
+            return false;
+        }
+        this.formGroup.appendChild(this.mask);
+        this.ico.className = 'form-control-feedback fa';
+        this.ico.classList.add(this.icono);
+        this.ico.onclick = (e) => {
+            this.toggle();
+            e.stopPropagation();
+            return false;
+        }
+        this.formGroup.appendChild(this.ico);
+        this.element.appendChild(this.formGroup);
+        this.items.className = 'i-select-items';
+        this.element.appendChild(this.items);
+        this.config();
+        this.fill();
+    }
+
+    private setOptions(options) {
+        this.options = options;
+        if (options.icon) {
+            this.type = ETypeSelect.ICON;
+            this.itemIconState = new State();
+        } else if (options.image) {
+            this.type = ETypeSelect.IMAGE;
+            this.itemImageState = new State();
+        }
+    }
+
+    private config(clear?) {
+        switch (this.type) {
+            case ETypeSelect.ICON:
+                if (clear) {
+                    this.formGroup.classList.remove('has-i-icon');
+                    this.items.classList.remove('fa-lu');
+                    this.formGroup.removeChild(this.icoItem);
+                    this.icoItem = null;
+                } else {
+                    this.formGroup.classList.add('has-i-icon');
+                    this.items.classList.add('fa-lu');
+                    this.icoItem = document.createElement('i');
+                    this.icoItem.className = 'form-control-i-icon fa';
+                    this.formGroup.appendChild(this.icoItem);
+                }
+
+                break;
+            case ETypeSelect.IMAGE:
+                if (clear) {
+                    this.formGroup.classList.remove('has-i-image');
+                    this.items.classList.remove('i-image-lu');
+                    this.formGroup.removeChild(this.imgItem);
+                    this.imgItem = null;
+                } else {
+                    this.formGroup.classList.add('has-i-image');
+                    this.items.classList.add('i-image-lu');
+                    this.imgItem = document.createElement('img');
+                    this.imgItem.className = 'form-control-i-image';
+                    this.formGroup.appendChild(this.imgItem);
+                }
+                break;
+        }
+    }
+
+    private fill() {
+        this.length = this.data.length;
+        for (var i = 0; i < this.length; i++) {
+            var item = this.data[i];
+            var li = document.createElement('li');
+            if (item.icon) this.addIcon(li, item.icon);
+            else if (item.image) this.addImage(li, item.image);
+            li.appendChild(document.createTextNode(item.value));
+            li.tabIndex = i;
+            li.setAttribute('data-option', item.option);
+            var self = this;
+            li.onclick = function (e) {
+                self.changeValue(this);
+                self.toggle();
+                e.stopPropagation();
+                return false;
+            }
+            li.onkeyup = function (e) {
+                if (e) {
+                    if (e.keyCode == 13) {
+                        self.changeValue(self.itemSate.current);
+                        self.toggle();
+                    }
+                    if (e.keyCode == 38) {
+                        self.previous();
+                    }
+                    if (e.keyCode == 40) {
+                        self.next();
+                    }
+                }
+            }
+            this.items.appendChild(li);
+            if (item.selected) {
+                this.selectItem(item.option);
+            }
+        }
+    }
+
+    private addIcon(element: HTMLElement, classIcon: string) {
+        var tmpIcon = document.createElement('i');
+        tmpIcon.className = 'fa fa-li';
+        tmpIcon.classList.add(classIcon);
+        element.appendChild(tmpIcon);
+    }
+
+    private addImage(element: HTMLElement, src: string) {
+        var tmpImg = document.createElement('img');
+        tmpImg.className = 'i-image-item';
+        tmpImg.src = src;
+        element.appendChild(tmpImg);
+    }
+
+    private animationIn() {
+        this.items.classList.add('open');
+        this.animaIn.run(this.items);
+    }
+
+    private animationOut() {
+        this.animaOut.run(this.items,() => {
+            this.items.classList.remove('open');
+        });
+    }
+
+    private changeValue(htmlElement: HTMLElement) {
+        this.itemSate.exchange(htmlElement);
+        this.input.value = this.itemSate.current.textContent;
+        this.input.setAttribute('data-option', this.itemSate.current.getAttribute('data-option'));
+        this.hidden.value = this.input.value;
+        this.input.onchange();
+        this.itemSate.old.classList.remove('bg-primary');
+        this.itemSate.current.classList.add('bg-primary');
+        if (this.isTypeIcon()) {
+            this.changeIconItem();
+        } else if (this.isTypeImage()) {
+            this.changeImageItem();
+        }
+        this.input.focus();
+    }
+
+    private changeIconItem() {
+        this.itemIconState.exchange(this.getIconItem());
+        this.icoItem.classList.remove(this.itemIconState.old);
+        this.icoItem.classList.add(this.itemIconState.current);
+    }
+
+    private changeImageItem() {
+        this.itemImageState.exchange(this.getImageItem());
+        this.imgItem.src = this.itemImageState.current;
+    }
+
+    private next() {
+        if (!this.disabled && !this.readOnly && this.itemSate.current) {
+            var item = this.itemSate.current.nextElementSibling;
+            if (item) {
+                this.changeValue(<HTMLElement>item);
+            }
+        }
+    }
+
+    private previous() {
+        if (!this.disabled && !this.readOnly && this.itemSate.current) {
+            var item = this.itemSate.current.previousSibling;
+            if (item) {
+                this.changeValue(<HTMLElement>item);
+            }
+        }
+    }
+
+    private isTypeIcon() {
+        return this.type === ETypeSelect.ICON;
+    }
+
+    private isTypeImage() {
+        return this.type === ETypeSelect.IMAGE;
+    }
+
+    private isTypeSimple() {
+        return this.type === ETypeSelect.SIMPLE;
+    }
+
+    public toggle() {
+        if (!this.readOnly && !this.disabled) {
+            this.open = this.items.classList.contains('open');
+            if (this.open) {
+                this.animationOut();
+                this.open = false;
+            } else {
+                ISelect.clear();
+                this.animationIn();
+                this.open = true;
+                if (!this.itemSate.current) {
+                    this.itemSate.current = this.items.getElementsByTagName('li')[0];
+                    this.itemSate.current.classList.add('bg-primary');
+                }
+                this.itemSate.current.focus();
+                this.input.focus();
+            }
+        }
+    }
+
+    public selectItem(option) {
+        if (!this.disabled && !this.readOnly) {
+            var lis = this.items.getElementsByTagName('li');
+            if (this.length > 0) {
+                var found = false;
+                var i = 0;
+                do {
+                    var item = lis[i];
+                    i++;
+                    if (item.getAttribute('data-option') == option) {
+                        this.itemSate.exchange(item);
+                        found = true;
+                    }
+                } while (!found && i < this.length);
+                if (found) {
+                    this.input.value = this.itemSate.current.textContent;
+                    this.input.setAttribute('data-option', this.itemSate.current.getAttribute('data-option'));
+                    this.hidden.value = this.input.value;
+                    if (this.isTypeIcon()) {
+                        this.changeIconItem();
+                    } else if (this.isTypeImage()) {
+                        this.changeImageItem();
+                    }
+                    this.itemSate.current.focus();
+                    if (this.itemSate.old) this.itemSate.old.classList.remove('bg-primary');
+                    this.itemSate.current.classList.add('bg-primary');
+                }
+            }
+        }
+    }
+
+    public addItem(option, value, args) {
+        if (!this.disabled && !this.readOnly) {
+            var li = document.createElement('li');
+            if (args) {
+                if (args.icon && this.isTypeIcon()) {
+                    this.addIcon(li, args.icon);
+                } else if (args.image && this.isTypeImage()) {
+                    this.addImage(li, args.image);
+                }
+            }
+            li.appendChild(document.createTextNode(value));
+            li.tabIndex = this.length + 1;
+            li.setAttribute('data-option', option);
+            this.input.setAttribute('data-option', option);
+            var self = this;
+            li.onclick = function (e) {
+                self.changeValue(this);
+                self.toggle();
+                e.stopPropagation();
+                return false;
+            }
+
+            this.items.appendChild(li);
+            this.length++;
+        }
+    }
+
+    public getItem() {
+        if (!this.disabled && !this.readOnly) {
+            if (this.isTypeIcon()) {
+                var tmpIcon: any = this.itemSate.current.getElementsByClassName('fa')[0];
+                return {
+                    value: this.input.value,
+                    option: this.input.getAttribute('data-option'),
+                    icon: tmpIcon.classList.item(2)
+                };
+            } else if (this.isTypeImage()) {
+                var tmpImg: any = this.itemSate.current.getElementsByClassName('i-image-item')[0];
+                return {
+                    value: this.input.value,
+                    option: this.input.getAttribute('data-option'),
+                    image: tmpImg.src
+                };
+            } else {
+                return {
+                    value: this.input.value,
+                    option: this.input.getAttribute('data-option')
+                };
+            }
+        }
+    }
+
+    public getValue() {
+        if (!this.disabled && !this.readOnly) {
+            return this.input.value;
+        }
+    }
+
+    public getOption() {
+        if (!this.disabled && !this.readOnly) {
+            return this.input.getAttribute('data-option');
+        }
+    }
+
+    public isOpen() {
+        if (!this.disabled && !this.readOnly) {
+            return this.open;
+        }
+    }
+
+    /**
+    * get Icon Item Class
+    * @returns {string} class Icon
+    * @method getIconItem
+    */
+    public getIconItem() {
+        if (!this.disabled && !this.readOnly) {
+            var tmpIcon: any = this.itemSate.current.getElementsByClassName('fa')[0];
+            return tmpIcon.classList.item(2);
+        }
+    }
+
+    /**
+    * get Image Item src
+    * @returns {string} src
+    * @method getImageItem
+    */
+    public getImageItem() {
+        if (!this.disabled && !this.readOnly) {
+            var tmpImg: any = this.itemSate.current.getElementsByClassName('i-image-item')[0];
+            return tmpImg.src;
+        }
+    }
+    /**
+    * set Data
+    * @param {[JSON]} data
+    * @param {JSON} options
+    * @method setDate
+    */
+    public setData(data, options) {
+        if (!this.disabled && !this.readOnly) {
+            /**
+            * Clear
+            */
+            this.clearData();
+            /**
+            * Load
+            */
+            this.data = data;
+            if (options) this.setOptions(options);
+            this.config();
+            this.fill();
+        }
+    }
+
+    public isDisabled() {
+        return this.disabled;
+    }
+
+    public setDisabled(disabled: boolean) {
+        this.disabled = disabled;
+        this.input.disabled = this.disabled;
+        if (this.disabled) {
+            this.element.classList.add('disabled');
+        } else {
+            this.element.classList.remove('disabled');
+        }
+    }
+
+    public isReadOnly() {
+        return this.readOnly;
+    }
+
+    public setReadOnly(readOnly: boolean) {
+        this.readOnly = readOnly;
+        this.input.readOnly = this.readOnly;
+        if (this.readOnly) {
+            this.element.classList.add('read-only');
+        } else {
+            this.element.classList.remove('read-only');
+        }
+    }
+
+    public setHeight(height: string) {
+        if (!this.disabled && !this.readOnly) {
+            this.items.style.height = height;
+        }
+    }
+
+    public getSize() {
+        if (!this.disabled || !this.readOnly) {
+            return this.length;
+        }
+    }
+
+    public setIcono(icono: string) {
+        if (!this.disabled && !this.readOnly) {
+            this.ico.classList.remove(this.icono);
+            this.icono = icono;
+            this.ico.classList.add(this.icono);
+        }
+    }
+
+    public focus() {
+        if (!this.disabled && !this.readOnly) {
+            this.input.focus();
+        }
+    }
+
+    public loading() {
+        if (this.ico.classList.contains(this.icono)) this.ico.classList.remove(this.icono);
+        if (!this.ico.classList.contains('fa-spinner')) this.ico.classList.add('fa-spinner');
+        if (!this.ico.classList.contains('fa-spin')) this.ico.classList.add('fa-spin');
+        this.setDisabled(true);
+    }
+
+    public complete() {
+        if (this.ico.classList.contains('fa-spinner')) this.ico.classList.remove('fa-spinner');
+        if (this.ico.classList.contains('fa-spin')) this.ico.classList.remove('fa-spin');
+        if (!this.ico.classList.contains(this.icono)) this.ico.classList.add(this.icono);
+        this.setDisabled(false);
+    }
+
+    public clearData() {
+        this.config(true);
+        this.hidden.value = '';
+        this.input.value = '';
+        this.input.removeAttribute('data-option');
+        this.items.innerHTML = '';
+    }
+
+    public onchange(callback) {
+        this.input.onchange = callback;
+    }
+
+    public static clear() {
+        var selects = document.getElementsByClassName('i-select');
+        var n = selects.length;
+        if (n > 0) {
+            for (var i = 0; i < n; i++) {
+                var select = <HTMLElement> selects[i];
+                var items = select.getElementsByTagName('ul')[0];
+                if (items) {
+                    if (items.classList.contains('open')) {
+                        items.classList.add('i-ease-out');
+                        items.classList.add('i-0-2s');
+                        items.classList.add('i-fade-out-up');
+                        (function (items) {
+                            setTimeout(() => {
+                                items.classList.remove('i-ease-out');
+                                items.classList.remove('i-0-2s');
+                                items.classList.remove('i-fade-out-up');
+                                items.classList.remove('open');
+                            }, 200);
+                        })(items);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
 @ Autor :@yonax73 | yonax73@gmail.com
 @ Version: 0.1
 @ Date : 25/02/2015
