@@ -37,9 +37,11 @@ class Select {
     private itemIconState: State;
     private itemImageState: State;
     private inputLgClass = 'i-select-lg';
+    private action: String;
 
-    constructor(htmlElement: HTMLElement, data, options) {
+    constructor(htmlElement: HTMLElement,action,data, options) {
         this.element = htmlElement;
+        this.action = action;
         this.data = data;
         if (options) this.setOptions(options);
         this.animaIn = new Animation('i-ease', 'i-flip-in-x', 'i-2s', 200);
@@ -135,6 +137,22 @@ class Select {
     }
 
     private fill() {
+        if (this.action) {
+            var actionHXR = new XHR('GET', this.action);
+            actionHXR.setContentType('application/x-www-form-urlencoded;charset=UTF-8');
+            actionHXR.onBeforeSend(() => { this.loading() });
+            actionHXR.onReady((xhr) => {
+                this.data = JSON.parse(xhr.responseText);
+                var n = this.data.length;
+                this.fillItems();
+            });
+            actionHXR.send();
+        } else {
+            this.fillItems();
+        }       
+    }
+
+    private fillItems() {
         this.length = this.data.length;
         for (var i = 0; i < this.length; i++) {
             var item = this.data[i];
