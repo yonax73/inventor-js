@@ -38,10 +38,12 @@ class Select {
     private itemImageState: State;
     private inputLgClass = 'i-select-lg';
     private action: String;
+    private callback;
 
-    constructor(htmlElement: HTMLElement,action,data, options) {
+    constructor(htmlElement: HTMLElement,action,callback,data, options) {
         this.element = htmlElement;
         this.action = action;
+        this.callback = callback;
         this.data = data;
         if (options) this.setOptions(options);
         this.animaIn = new Animation('i-ease', 'i-flip-in-x', 'i-2s', 200);
@@ -189,6 +191,7 @@ class Select {
                 this.selectItem(item.option);
             }
         }
+        if (this.callback) this.callback();
     }
 
     private addIcon(element: HTMLElement, classIcon: string) {

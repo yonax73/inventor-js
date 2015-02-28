@@ -19,7 +19,7 @@ var ETypeSelect;
     ETypeSelect[ETypeSelect["IMAGE"] = 2] = "IMAGE";
 })(ETypeSelect || (ETypeSelect = {}));
 var Select = (function () {
-    function Select(htmlElement, action, data, options) {
+    function Select(htmlElement, action, callback, data, options) {
         var _this = this;
         this.hidden = document.createElement('input');
         this.input = document.createElement('input');
@@ -38,6 +38,7 @@ var Select = (function () {
         this.inputLgClass = 'i-select-lg';
         this.element = htmlElement;
         this.action = action;
+        this.callback = callback;
         this.data = data;
         if (options)
             this.setOptions(options);
@@ -197,6 +198,8 @@ var Select = (function () {
                 this.selectItem(item.option);
             }
         }
+        if (this.callback)
+            this.callback();
     };
     Select.prototype.addIcon = function (element, classIcon) {
         var tmpIcon = document.createElement('i');
