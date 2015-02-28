@@ -354,9 +354,23 @@ var BaseForm = (function () {
             case 'textarea':
             case 'password':
                 if (input.dataset.required) {
-                    this.result = BaseForm.isEmpty(input.value) ? this.error(input) : this.success(input); //Check required
-                    if (this.result) {
-                        this.generalValidations(input);
+                    if (input.dataset.option) {
+                        if (BaseForm.isValidOption(input, input.dataset.option)) {
+                            //input hidden containt the element name
+                            var inputHidden = input.previousElementSibling;
+                            this.result = this.success(inputHidden);
+                        }
+                        else {
+                            //input hidden containt the element name
+                            var inputHidden = input.previousElementSibling;
+                            this.result = this.error(inputHidden);
+                        }
+                    }
+                    else {
+                        this.result = BaseForm.isEmpty(input.value) ? this.error(input) : this.success(input); //Check required
+                        if (this.result) {
+                            this.generalValidations(input);
+                        }
                     }
                 }
                 else {
@@ -483,9 +497,6 @@ var BaseForm = (function () {
         }
         else if (input.dataset.creditcard) {
             this.result = BaseForm.isCreditCard(input.value) ? this.success(input) : this.error(input); //Check credit card
-        }
-        else if (input.dataset.option) {
-            this.result = BaseForm.isValidOption(input, input.dataset.option) ? this.success(input) : this.error(input); //Check UI-Select Option
         }
         else {
             this.success(input);
@@ -1101,4 +1112,3 @@ var inventorjs_author = 'Yonatan Alexis Quintero Rodriguez';
 var inventorjs_version = '0.1';
 var inventorjs_email = 'yonax73@gmail.com';
 var inventorjs_twitter = '@yonax73';
-//# sourceMappingURL=Inventor.js.map

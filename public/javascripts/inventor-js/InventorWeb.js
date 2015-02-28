@@ -18,10 +18,9 @@ var ETypeSelect;
     ETypeSelect[ETypeSelect["ICON"] = 1] = "ICON";
     ETypeSelect[ETypeSelect["IMAGE"] = 2] = "IMAGE";
 })(ETypeSelect || (ETypeSelect = {}));
-var ISelect = (function () {
-    function ISelect(htmlElement, data, options) {
+var Select = (function () {
+    function Select(htmlElement, data, options) {
         var _this = this;
-        this.formGroup = document.createElement('div');
         this.hidden = document.createElement('input');
         this.input = document.createElement('input');
         this.mask = document.createElement('div');
@@ -44,11 +43,11 @@ var ISelect = (function () {
         this.animaIn = new Animation('i-ease', 'i-flip-in-x', 'i-2s', 200);
         this.animaOut = new Animation('i-ease', 'i-flip-out-x', 'i-0-2s', 200);
         this.itemSate = new State();
-        this.formGroup.className = 'form-group  has-feedback';
         this.hidden.type = 'hidden';
         if (this.element.getAttribute('data-name'))
             this.hidden.name = this.element.getAttribute('data-name');
-        this.formGroup.appendChild(this.hidden);
+        if (this.element.getAttribute('data-required'))
+            this.input.dataset.required = this.element.getAttribute('data-required');
         this.input.type = 'text';
         this.input.className = 'form-control';
         if (this.element.classList.contains(this.inputLgClass))
@@ -73,14 +72,14 @@ var ISelect = (function () {
                 }
             }
         };
-        this.formGroup.appendChild(this.input);
+        this.element.appendChild(this.input);
         this.mask.className = 'i-select-mask';
         this.mask.onclick = function (e) {
             _this.toggle();
             e.stopPropagation();
             return false;
         };
-        this.formGroup.appendChild(this.mask);
+        this.element.appendChild(this.mask);
         this.ico.className = 'form-control-feedback fa';
         this.ico.classList.add(this.icono);
         this.ico.onclick = function (e) {
@@ -88,14 +87,13 @@ var ISelect = (function () {
             e.stopPropagation();
             return false;
         };
-        this.formGroup.appendChild(this.ico);
-        this.element.appendChild(this.formGroup);
+        this.element.appendChild(this.ico);
         this.items.className = 'i-select-items';
         this.element.appendChild(this.items);
         this.config();
         this.fill();
     }
-    ISelect.prototype.setOptions = function (options) {
+    Select.prototype.setOptions = function (options) {
         this.options = options;
         if (options.icon) {
             this.type = 1 /* ICON */;
@@ -106,41 +104,41 @@ var ISelect = (function () {
             this.itemImageState = new State();
         }
     };
-    ISelect.prototype.config = function (clear) {
+    Select.prototype.config = function (clear) {
         switch (this.type) {
             case 1 /* ICON */:
                 if (clear) {
-                    this.formGroup.classList.remove('has-i-icon');
+                    this.element.classList.remove('has-i-icon');
                     this.items.classList.remove('fa-lu');
-                    this.formGroup.removeChild(this.icoItem);
+                    this.element.removeChild(this.icoItem);
                     this.icoItem = null;
                 }
                 else {
-                    this.formGroup.classList.add('has-i-icon');
+                    this.element.classList.add('has-i-icon');
                     this.items.classList.add('fa-lu');
                     this.icoItem = document.createElement('i');
                     this.icoItem.className = 'form-control-i-icon fa';
-                    this.formGroup.appendChild(this.icoItem);
+                    this.element.appendChild(this.icoItem);
                 }
                 break;
             case 2 /* IMAGE */:
                 if (clear) {
-                    this.formGroup.classList.remove('has-i-image');
+                    this.element.classList.remove('has-i-image');
                     this.items.classList.remove('i-image-lu');
-                    this.formGroup.removeChild(this.imgItem);
+                    this.element.removeChild(this.imgItem);
                     this.imgItem = null;
                 }
                 else {
-                    this.formGroup.classList.add('has-i-image');
+                    this.element.classList.add('has-i-image');
                     this.items.classList.add('i-image-lu');
                     this.imgItem = document.createElement('img');
                     this.imgItem.className = 'form-control-i-image';
-                    this.formGroup.appendChild(this.imgItem);
+                    this.element.appendChild(this.imgItem);
                 }
                 break;
         }
     };
-    ISelect.prototype.fill = function () {
+    Select.prototype.fill = function () {
         this.length = this.data.length;
         for (var i = 0; i < this.length; i++) {
             var item = this.data[i];
@@ -179,29 +177,29 @@ var ISelect = (function () {
             }
         }
     };
-    ISelect.prototype.addIcon = function (element, classIcon) {
+    Select.prototype.addIcon = function (element, classIcon) {
         var tmpIcon = document.createElement('i');
         tmpIcon.className = 'fa fa-li';
         tmpIcon.classList.add(classIcon);
         element.appendChild(tmpIcon);
     };
-    ISelect.prototype.addImage = function (element, src) {
+    Select.prototype.addImage = function (element, src) {
         var tmpImg = document.createElement('img');
         tmpImg.className = 'i-image-item';
         tmpImg.src = src;
         element.appendChild(tmpImg);
     };
-    ISelect.prototype.animationIn = function () {
+    Select.prototype.animationIn = function () {
         this.items.classList.add('open');
         this.animaIn.run(this.items);
     };
-    ISelect.prototype.animationOut = function () {
+    Select.prototype.animationOut = function () {
         var _this = this;
         this.animaOut.run(this.items, function () {
             _this.items.classList.remove('open');
         });
     };
-    ISelect.prototype.changeValue = function (htmlElement) {
+    Select.prototype.changeValue = function (htmlElement) {
         this.itemSate.exchange(htmlElement);
         this.input.value = this.itemSate.current.textContent;
         this.input.setAttribute('data-option', this.itemSate.current.getAttribute('data-option'));
@@ -217,16 +215,16 @@ var ISelect = (function () {
         }
         this.input.focus();
     };
-    ISelect.prototype.changeIconItem = function () {
+    Select.prototype.changeIconItem = function () {
         this.itemIconState.exchange(this.getIconItem());
         this.icoItem.classList.remove(this.itemIconState.old);
         this.icoItem.classList.add(this.itemIconState.current);
     };
-    ISelect.prototype.changeImageItem = function () {
+    Select.prototype.changeImageItem = function () {
         this.itemImageState.exchange(this.getImageItem());
         this.imgItem.src = this.itemImageState.current;
     };
-    ISelect.prototype.next = function () {
+    Select.prototype.next = function () {
         if (!this.disabled && !this.readOnly && this.itemSate.current) {
             var item = this.itemSate.current.nextElementSibling;
             if (item) {
@@ -234,7 +232,7 @@ var ISelect = (function () {
             }
         }
     };
-    ISelect.prototype.previous = function () {
+    Select.prototype.previous = function () {
         if (!this.disabled && !this.readOnly && this.itemSate.current) {
             var item = this.itemSate.current.previousSibling;
             if (item) {
@@ -242,16 +240,16 @@ var ISelect = (function () {
             }
         }
     };
-    ISelect.prototype.isTypeIcon = function () {
+    Select.prototype.isTypeIcon = function () {
         return this.type === 1 /* ICON */;
     };
-    ISelect.prototype.isTypeImage = function () {
+    Select.prototype.isTypeImage = function () {
         return this.type === 2 /* IMAGE */;
     };
-    ISelect.prototype.isTypeSimple = function () {
+    Select.prototype.isTypeSimple = function () {
         return this.type === 0 /* SIMPLE */;
     };
-    ISelect.prototype.toggle = function () {
+    Select.prototype.toggle = function () {
         if (!this.readOnly && !this.disabled) {
             this.open = this.items.classList.contains('open');
             if (this.open) {
@@ -259,7 +257,7 @@ var ISelect = (function () {
                 this.open = false;
             }
             else {
-                ISelect.clear();
+                Select.clear();
                 this.animationIn();
                 this.open = true;
                 if (!this.itemSate.current) {
@@ -271,7 +269,7 @@ var ISelect = (function () {
             }
         }
     };
-    ISelect.prototype.selectItem = function (option) {
+    Select.prototype.selectItem = function (option) {
         if (!this.disabled && !this.readOnly) {
             var lis = this.items.getElementsByTagName('li');
             if (this.length > 0) {
@@ -303,7 +301,7 @@ var ISelect = (function () {
             }
         }
     };
-    ISelect.prototype.addItem = function (option, value, args) {
+    Select.prototype.addItem = function (option, value, args) {
         if (!this.disabled && !this.readOnly) {
             var li = document.createElement('li');
             if (args) {
@@ -329,7 +327,7 @@ var ISelect = (function () {
             this.length++;
         }
     };
-    ISelect.prototype.getItem = function () {
+    Select.prototype.getItem = function () {
         if (!this.disabled && !this.readOnly) {
             if (this.isTypeIcon()) {
                 var tmpIcon = this.itemSate.current.getElementsByClassName('fa')[0];
@@ -355,17 +353,17 @@ var ISelect = (function () {
             }
         }
     };
-    ISelect.prototype.getValue = function () {
+    Select.prototype.getValue = function () {
         if (!this.disabled && !this.readOnly) {
             return this.input.value;
         }
     };
-    ISelect.prototype.getOption = function () {
+    Select.prototype.getOption = function () {
         if (!this.disabled && !this.readOnly) {
             return this.input.getAttribute('data-option');
         }
     };
-    ISelect.prototype.isOpen = function () {
+    Select.prototype.isOpen = function () {
         if (!this.disabled && !this.readOnly) {
             return this.open;
         }
@@ -375,7 +373,7 @@ var ISelect = (function () {
     * @returns {string} class Icon
     * @method getIconItem
     */
-    ISelect.prototype.getIconItem = function () {
+    Select.prototype.getIconItem = function () {
         if (!this.disabled && !this.readOnly) {
             var tmpIcon = this.itemSate.current.getElementsByClassName('fa')[0];
             return tmpIcon.classList.item(2);
@@ -386,7 +384,7 @@ var ISelect = (function () {
     * @returns {string} src
     * @method getImageItem
     */
-    ISelect.prototype.getImageItem = function () {
+    Select.prototype.getImageItem = function () {
         if (!this.disabled && !this.readOnly) {
             var tmpImg = this.itemSate.current.getElementsByClassName('i-image-item')[0];
             return tmpImg.src;
@@ -398,7 +396,7 @@ var ISelect = (function () {
     * @param {JSON} options
     * @method setDate
     */
-    ISelect.prototype.setData = function (data, options) {
+    Select.prototype.setData = function (data, options) {
         if (!this.disabled && !this.readOnly) {
             /**
             * Clear
@@ -414,10 +412,10 @@ var ISelect = (function () {
             this.fill();
         }
     };
-    ISelect.prototype.isDisabled = function () {
+    Select.prototype.isDisabled = function () {
         return this.disabled;
     };
-    ISelect.prototype.setDisabled = function (disabled) {
+    Select.prototype.setDisabled = function (disabled) {
         this.disabled = disabled;
         this.input.disabled = this.disabled;
         if (this.disabled) {
@@ -427,10 +425,10 @@ var ISelect = (function () {
             this.element.classList.remove('disabled');
         }
     };
-    ISelect.prototype.isReadOnly = function () {
+    Select.prototype.isReadOnly = function () {
         return this.readOnly;
     };
-    ISelect.prototype.setReadOnly = function (readOnly) {
+    Select.prototype.setReadOnly = function (readOnly) {
         this.readOnly = readOnly;
         this.input.readOnly = this.readOnly;
         if (this.readOnly) {
@@ -440,29 +438,29 @@ var ISelect = (function () {
             this.element.classList.remove('read-only');
         }
     };
-    ISelect.prototype.setHeight = function (height) {
+    Select.prototype.setHeight = function (height) {
         if (!this.disabled && !this.readOnly) {
             this.items.style.height = height;
         }
     };
-    ISelect.prototype.getSize = function () {
+    Select.prototype.getSize = function () {
         if (!this.disabled || !this.readOnly) {
             return this.length;
         }
     };
-    ISelect.prototype.setIcono = function (icono) {
+    Select.prototype.setIcono = function (icono) {
         if (!this.disabled && !this.readOnly) {
             this.ico.classList.remove(this.icono);
             this.icono = icono;
             this.ico.classList.add(this.icono);
         }
     };
-    ISelect.prototype.focus = function () {
+    Select.prototype.focus = function () {
         if (!this.disabled && !this.readOnly) {
             this.input.focus();
         }
     };
-    ISelect.prototype.loading = function () {
+    Select.prototype.loading = function () {
         if (this.ico.classList.contains(this.icono))
             this.ico.classList.remove(this.icono);
         if (!this.ico.classList.contains('fa-spinner'))
@@ -471,7 +469,7 @@ var ISelect = (function () {
             this.ico.classList.add('fa-spin');
         this.setDisabled(true);
     };
-    ISelect.prototype.complete = function () {
+    Select.prototype.complete = function () {
         if (this.ico.classList.contains('fa-spinner'))
             this.ico.classList.remove('fa-spinner');
         if (this.ico.classList.contains('fa-spin'))
@@ -480,17 +478,17 @@ var ISelect = (function () {
             this.ico.classList.add(this.icono);
         this.setDisabled(false);
     };
-    ISelect.prototype.clearData = function () {
+    Select.prototype.clearData = function () {
         this.config(true);
         this.hidden.value = '';
         this.input.value = '';
         this.input.removeAttribute('data-option');
         this.items.innerHTML = '';
     };
-    ISelect.prototype.onchange = function (callback) {
+    Select.prototype.onchange = function (callback) {
         this.input.onchange = callback;
     };
-    ISelect.clear = function () {
+    Select.clear = function () {
         var selects = document.getElementsByClassName('i-select');
         var n = selects.length;
         if (n > 0) {
@@ -515,7 +513,7 @@ var ISelect = (function () {
             }
         }
     };
-    return ISelect;
+    return Select;
 })();
 /**
 @ Autor :@yonax73 | yonax73@gmail.com
@@ -525,12 +523,12 @@ var ISelect = (function () {
 @ Update by: @yonax73  | yonax73@gmail.com
 @ Description: validation form
 **/
-var IForm = (function (_super) {
-    __extends(IForm, _super);
-    function IForm(element) {
+var Form = (function (_super) {
+    __extends(Form, _super);
+    function Form(element) {
         _super.call(this, element);
     }
-    return IForm;
+    return Form;
 })(BaseForm);
 /**
 @ Autor :@yonax73 | yonax73@gmail.com
@@ -540,8 +538,8 @@ var IForm = (function (_super) {
 @ Update by: @yonax73 | yonax73@gmail.com
 @ Description: Alert
 **/
-var IAlert = (function () {
-    function IAlert(htmlElement) {
+var Alert = (function () {
+    function Alert(htmlElement) {
         this.element = null;
         this.button = document.createElement('button');
         this.span = document.createElement('span');
@@ -574,7 +572,7 @@ var IAlert = (function () {
         this.p.appendChild(this.strong);
         this.element.appendChild(this.p);
     }
-    IAlert.prototype.close = function () {
+    Alert.prototype.close = function () {
         if (this.type !== 'close') {
             switch (this.type) {
                 case 'success':
@@ -601,7 +599,7 @@ var IAlert = (function () {
             }, 1000);
         }
     };
-    IAlert.prototype.success = function (message) {
+    Alert.prototype.success = function (message) {
         this.removeAnimation();
         this.i.className = 'fa fa-lg pull-left';
         this.i.classList.add(this.icoSuccess);
@@ -610,7 +608,7 @@ var IAlert = (function () {
         this.strong.textContent = message;
         this.type = 'success';
     };
-    IAlert.prototype.info = function (message) {
+    Alert.prototype.info = function (message) {
         this.i.className = 'fa fa-lg pull-left';
         this.i.classList.add(this.icoInfo);
         this.element.className = 'alert alert-info alert-dismissible';
@@ -619,7 +617,7 @@ var IAlert = (function () {
         this.type = 'info';
         this.removeAnimation();
     };
-    IAlert.prototype.warning = function (message) {
+    Alert.prototype.warning = function (message) {
         this.i.className = 'fa fa-lg pull-left';
         this.i.classList.add(this.icoWarning);
         this.element.className = 'alert alert-warning alert-dismissible';
@@ -628,7 +626,7 @@ var IAlert = (function () {
         this.type = 'warning';
         this.removeAnimation();
     };
-    IAlert.prototype.danger = function (message) {
+    Alert.prototype.danger = function (message) {
         this.i.className = 'fa fa-lg pull-left';
         this.i.classList.add(this.icoDanger);
         this.element.className = 'alert alert-danger alert-dismissible';
@@ -637,7 +635,7 @@ var IAlert = (function () {
         this.type = 'danger';
         this.removeAnimation();
     };
-    IAlert.prototype.wait = function (message) {
+    Alert.prototype.wait = function (message) {
         this.i.className = 'fa fa-spin fa-lg pull-left';
         this.i.classList.add(this.icoWait);
         this.element.className = 'alert alert-info alert-dismissible';
@@ -646,12 +644,12 @@ var IAlert = (function () {
         this.type = 'wait';
         this.removeAnimation();
     };
-    IAlert.prototype.addAnimation = function () {
+    Alert.prototype.addAnimation = function () {
         this.element.classList.add(this.typeAnimation);
         this.element.classList.add(this.durationAnimation);
         this.element.classList.add(this.animationIn);
     };
-    IAlert.prototype.removeAnimation = function () {
+    Alert.prototype.removeAnimation = function () {
         var self = this;
         setTimeout(function () {
             self.element.classList.remove(self.typeAnimation);
@@ -659,7 +657,7 @@ var IAlert = (function () {
             self.element.classList.remove(self.animationIn);
         }, 1000);
     };
-    return IAlert;
+    return Alert;
 })();
 /**
 @ Autor :@yonax73 | yonax73@gmail.com
@@ -669,8 +667,8 @@ var IAlert = (function () {
 @ Update by: @yonax73 | yonax73@gmail.com
 @ Description: DataTable
 **/
-var IDataTable = (function () {
-    function IDataTable(element, action, fields) {
+var DataTable = (function () {
+    function DataTable(element, action, fields) {
         this.element = element;
         this.action = action;
         this.fields = fields;
@@ -678,12 +676,12 @@ var IDataTable = (function () {
         this.table = document.createElement('table');
         this.init();
     }
-    IDataTable.prototype.init = function () {
+    DataTable.prototype.init = function () {
         this.icoLoading.className = 'fa fa-spinner fa-spin';
         this.table.className = 'i-data-table table table-striped';
         this.fillTable();
     };
-    IDataTable.prototype.fillTable = function () {
+    DataTable.prototype.fillTable = function () {
         var _this = this;
         var m = this.fields.length;
         if (m > 0) {
@@ -719,7 +717,7 @@ var IDataTable = (function () {
             actionHXR.send();
         }
     };
-    IDataTable.prototype.fillHeaderTable = function () {
+    DataTable.prototype.fillHeaderTable = function () {
         var m = this.fields.length;
         if (m > 0) {
             var j = 0;
@@ -736,12 +734,11 @@ var IDataTable = (function () {
             this.table.appendChild(thead);
         }
     };
-    IDataTable.prototype.runIcoLoading = function () {
+    DataTable.prototype.runIcoLoading = function () {
         this.element.appendChild(this.icoLoading);
     };
-    IDataTable.prototype.stopIcoLoading = function () {
+    DataTable.prototype.stopIcoLoading = function () {
         this.element.removeChild(this.icoLoading);
     };
-    return IDataTable;
+    return DataTable;
 })();
-//# sourceMappingURL=InventorWeb.js.map

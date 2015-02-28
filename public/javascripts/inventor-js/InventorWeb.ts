@@ -12,9 +12,9 @@ enum ETypeSelect {
     ICON,
     IMAGE
 }
-class ISelect {
+class Select {
 
-    private formGroup = document.createElement('div');
+    
     private hidden = document.createElement('input');
     private input: any = document.createElement('input');
     private mask = document.createElement('div');
@@ -44,11 +44,10 @@ class ISelect {
         if (options) this.setOptions(options);
         this.animaIn = new Animation('i-ease', 'i-flip-in-x', 'i-2s', 200);
         this.animaOut = new Animation('i-ease', 'i-flip-out-x', 'i-0-2s', 200);
-        this.itemSate = new State();
-        this.formGroup.className = 'form-group  has-feedback';
+        this.itemSate = new State();       
         this.hidden.type = 'hidden';
-        if (this.element.getAttribute('data-name')) this.hidden.name = this.element.getAttribute('data-name');
-        this.formGroup.appendChild(this.hidden);
+        if (this.element.getAttribute('data-name')) this.hidden.name = this.element.getAttribute('data-name');   
+        if (this.element.getAttribute('data-required')) this.input.dataset.required = this.element.getAttribute('data-required');        
         this.input.type = 'text';
         this.input.className = 'form-control';
         if (this.element.classList.contains(this.inputLgClass)) this.input.classList.add('input-lg');
@@ -68,14 +67,14 @@ class ISelect {
                 }
             }
         };
-        this.formGroup.appendChild(this.input);
+        this.element.appendChild(this.input);
         this.mask.className = 'i-select-mask';
         this.mask.onclick = (e) => {
             this.toggle();
             e.stopPropagation();
             return false;
         }
-        this.formGroup.appendChild(this.mask);
+        this.element.appendChild(this.mask);
         this.ico.className = 'form-control-feedback fa';
         this.ico.classList.add(this.icono);
         this.ico.onclick = (e) => {
@@ -83,8 +82,7 @@ class ISelect {
             e.stopPropagation();
             return false;
         }
-        this.formGroup.appendChild(this.ico);
-        this.element.appendChild(this.formGroup);
+        this.element.appendChild(this.ico);        
         this.items.className = 'i-select-items';
         this.element.appendChild(this.items);
         this.config();
@@ -106,31 +104,31 @@ class ISelect {
         switch (this.type) {
             case ETypeSelect.ICON:
                 if (clear) {
-                    this.formGroup.classList.remove('has-i-icon');
+                    this.element.classList.remove('has-i-icon');
                     this.items.classList.remove('fa-lu');
-                    this.formGroup.removeChild(this.icoItem);
+                    this.element.removeChild(this.icoItem);
                     this.icoItem = null;
                 } else {
-                    this.formGroup.classList.add('has-i-icon');
+                    this.element.classList.add('has-i-icon');
                     this.items.classList.add('fa-lu');
                     this.icoItem = document.createElement('i');
                     this.icoItem.className = 'form-control-i-icon fa';
-                    this.formGroup.appendChild(this.icoItem);
+                    this.element.appendChild(this.icoItem);
                 }
 
                 break;
             case ETypeSelect.IMAGE:
                 if (clear) {
-                    this.formGroup.classList.remove('has-i-image');
+                    this.element.classList.remove('has-i-image');
                     this.items.classList.remove('i-image-lu');
-                    this.formGroup.removeChild(this.imgItem);
+                    this.element.removeChild(this.imgItem);
                     this.imgItem = null;
                 } else {
-                    this.formGroup.classList.add('has-i-image');
+                    this.element.classList.add('has-i-image');
                     this.items.classList.add('i-image-lu');
                     this.imgItem = document.createElement('img');
                     this.imgItem.className = 'form-control-i-image';
-                    this.formGroup.appendChild(this.imgItem);
+                    this.element.appendChild(this.imgItem);
                 }
                 break;
         }
@@ -263,7 +261,7 @@ class ISelect {
                 this.animationOut();
                 this.open = false;
             } else {
-                ISelect.clear();
+                Select.clear();
                 this.animationIn();
                 this.open = true;
                 if (!this.itemSate.current) {
@@ -537,7 +535,7 @@ class ISelect {
 @ Update by: @yonax73  | yonax73@gmail.com
 @ Description: validation form
 **/
-class IForm extends BaseForm {
+class Form extends BaseForm {
 
     constructor(element: HTMLFormElement) {
         super(element);
@@ -552,7 +550,7 @@ class IForm extends BaseForm {
 @ Update by: @yonax73 | yonax73@gmail.com
 @ Description: Alert
 **/
-class IAlert {
+class Alert {
 
     private element: HTMLElement = null;
     private button = document.createElement('button');
@@ -690,7 +688,7 @@ class IAlert {
 @ Update by: @yonax73 | yonax73@gmail.com
 @ Description: DataTable
 **/
-class IDataTable {
+class DataTable {
 
     private element: HTMLElement;
     private icoLoading: HTMLElement;

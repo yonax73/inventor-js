@@ -376,16 +376,28 @@ class BaseForm {
             case 'textarea':
             case 'password':
                 if (input.dataset.required) {
-                    this.result = BaseForm.isEmpty(input.value) ? this.error(input) : this.success(input);                 //Check required
-                    if (this.result) {
-                        this.generalValidations(input);
-                    }
+                    if (input.dataset.option) {
+                        if (BaseForm.isValidOption(input, input.dataset.option)) {                                             //Check required Select Option
+                            //input hidden containt the element name
+                            var inputHidden = input.previousElementSibling;
+                            this.result = this.success(inputHidden);
+                        } else {
+                            //input hidden containt the element name
+                            var inputHidden = input.previousElementSibling
+                            this.result = this.error(inputHidden);
+                        }
+                    } else {
+                        this.result = BaseForm.isEmpty(input.value) ? this.error(input) : this.success(input);                 //Check required
+                        if (this.result) {
+                            this.generalValidations(input);
+                        }
+                    }   
                 } else {
                     this.generalValidations(input);
                 }
                 break;
             default:
-                this.result = true;                                                                                    //The other inputs by default are valid
+                this.result = true;                                                                                          //The other inputs by default are valid
                 break;
         }
     }
@@ -487,9 +499,7 @@ class BaseForm {
             this.result = BaseForm.isNumber(input.value) ? this.success(input) : this.error(input);                        //Check number
         } else if (input.dataset.creditcard) {
             this.result = BaseForm.isCreditCard(input.value) ? this.success(input) : this.error(input);                    //Check credit card
-        } else if (input.dataset.option) {
-            this.result = BaseForm.isValidOption(input, input.dataset.option) ? this.success(input) : this.error(input);   //Check UI-Select Option
-        } else {
+        }  else {
             this.success(input);
         }
     }
