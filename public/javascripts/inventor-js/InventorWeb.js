@@ -151,6 +151,7 @@ var Select = (function () {
                 _this.data = JSON.parse(xhr.responseText);
                 var n = _this.data.length;
                 _this.fillItems();
+                _this.complete();
             });
             actionHXR.send();
         }

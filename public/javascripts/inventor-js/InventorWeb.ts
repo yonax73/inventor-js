@@ -145,6 +145,7 @@ class Select {
                 this.data = JSON.parse(xhr.responseText);
                 var n = this.data.length;
                 this.fillItems();
+                this.complete();
             });
             actionHXR.send();
         } else {
