@@ -148,10 +148,12 @@ class Select {
                 var n = this.data.length;
                 this.fillItems();
                 this.complete();
+                if (this.callback) this.callback();
             });
             actionHXR.send();
         } else {
             this.fillItems();
+            if (this.callback) this.callback();
         }       
     }
 
@@ -191,7 +193,7 @@ class Select {
                 this.selectItem(item.option);
             }
         }
-        if (this.callback) this.callback();
+        
     }
 
     private addIcon(element: HTMLElement, classIcon: string) {

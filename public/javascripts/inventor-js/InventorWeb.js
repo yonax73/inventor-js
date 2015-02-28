@@ -153,11 +153,15 @@ var Select = (function () {
                 var n = _this.data.length;
                 _this.fillItems();
                 _this.complete();
+                if (_this.callback)
+                    _this.callback();
             });
             actionHXR.send();
         }
         else {
             this.fillItems();
+            if (this.callback)
+                this.callback();
         }
     };
     Select.prototype.fillItems = function () {
@@ -198,8 +202,6 @@ var Select = (function () {
                 this.selectItem(item.option);
             }
         }
-        if (this.callback)
-            this.callback();
     };
     Select.prototype.addIcon = function (element, classIcon) {
         var tmpIcon = document.createElement('i');
