@@ -226,7 +226,7 @@ class Select {
         this.itemSate.exchange(htmlElement);
         this.input.value = this.itemSate.current.textContent;
         this.input.setAttribute('data-option', this.itemSate.current.getAttribute('data-option'));
-        this.hidden.value = this.input.value;
+        this.hidden.value = this.input.dataset.option;
         this.input.onchange();
         this.itemSate.old.classList.remove('bg-primary');
         this.itemSate.current.classList.add('bg-primary');
@@ -316,7 +316,7 @@ class Select {
                 if (found) {
                     this.input.value = this.itemSate.current.textContent;
                     this.input.setAttribute('data-option', this.itemSate.current.getAttribute('data-option'));
-                    this.hidden.value = this.input.value;
+                    this.hidden.value = this.input.dataset.option;
                     if (this.isTypeIcon()) {
                         this.changeIconItem();
                     } else if (this.isTypeImage()) {
