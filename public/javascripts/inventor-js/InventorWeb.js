@@ -74,6 +74,7 @@ var Select = (function () {
                 }
             }
         };
+        this.element.appendChild(this.hidden);
         this.element.appendChild(this.input);
         this.mask.className = 'i-select-mask';
         this.mask.onclick = function (e) {
