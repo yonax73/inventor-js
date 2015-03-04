@@ -338,6 +338,9 @@ var BaseForm = (function () {
     };
     BaseForm.prototype.validate = function (input) {
         switch (input.type) {
+            case 'checkbox':
+                this.result = false;
+                break;
             case 'text':
             case 'search':
             case 'email':
@@ -377,9 +380,6 @@ var BaseForm = (function () {
                 else {
                     this.generalValidations(input);
                 }
-                break;
-            case 'checkbox':
-                this.result = false;
                 break;
             default:
                 this.result = true; //The other inputs by default are valid
