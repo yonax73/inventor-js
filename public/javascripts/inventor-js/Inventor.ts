@@ -401,7 +401,7 @@ class BaseForm {
                 if (input.dataset.required) {
                     this.result = BaseForm.isChecked(input) ? this.success(input) : this.error(input);                         //is checked
                 }
-                break
+                break;
             default:
                 this.result = true;                                                                                          //The other inputs by default are valid
                 break;
