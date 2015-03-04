@@ -353,7 +353,9 @@ class BaseForm {
         i = 0;
         while (i < n) {
             totalMultiple *= multiples[i++];
-        } console.log(totalMultiple);
+        }
+        console.log(n);
+        console.log(totalMultiple);
         return totalMultiple > 0;
     }
 
