@@ -349,6 +349,7 @@ class BaseForm {
             multiples.push(this.result ? 1 : 0);
             i++;
         }
+        this.validateGroupCheckBox();
         i = 0;
         while (i < n) {
             totalMultiple *= multiples[i];
@@ -397,7 +398,7 @@ class BaseForm {
                 }
                 break;
             case 'checkbox':
-                this.validateGroupCheckBox();
+                this.result = false;
                 break
             default:
                 this.result = true;                                                                                          //The other inputs by default are valid
