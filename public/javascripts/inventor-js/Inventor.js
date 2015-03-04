@@ -338,14 +338,6 @@ var BaseForm = (function () {
     };
     BaseForm.prototype.validate = function (input) {
         switch (input.type) {
-            case 'checkbox':
-                if (input.dataset.required) {
-                    this.result = BaseForm.isChecked(input) ? this.success(input) : this.error(input); //is checked
-                }
-                else {
-                    this.result = false;
-                }
-                break;
             case 'text':
             case 'search':
             case 'email':
@@ -386,6 +378,11 @@ var BaseForm = (function () {
                     this.generalValidations(input);
                 }
                 break;
+            case 'checkbox':
+                if (input.dataset.required) {
+                    this.result = BaseForm.isChecked(input) ? this.success(input) : this.error(input); //is checked
+                }
+                break;
             case 'radio':
                 break;
             default:
@@ -397,6 +394,7 @@ var BaseForm = (function () {
         var groups = this.element.getElementsByClassName(this.iGroupChecboxClass);
         var n = groups ? groups.length : 0;
         if (n > 0) {
+            this.result = false;
             for (var g = 0; g < n; g++) {
                 var group = groups[g];
                 if (group.dataset.checkmin) {
