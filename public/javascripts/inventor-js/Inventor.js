@@ -333,6 +333,7 @@ var BaseForm = (function () {
         while (i < n) {
             totalMultiple *= multiples[i++];
         }
+        console.log(totalMultiple);
         return totalMultiple > 0;
     };
     BaseForm.prototype.validate = function (input) {
