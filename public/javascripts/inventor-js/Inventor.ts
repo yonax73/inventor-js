@@ -360,9 +360,6 @@ class BaseForm {
 
     protected validate(input) {
         switch (input.type) {
-            case 'checkbox':
-                this.result = false;
-                break
             case 'text':
             case 'search':
             case 'email':
@@ -400,7 +397,11 @@ class BaseForm {
                     this.generalValidations(input);
                 }
                 break;
-
+            case 'checkbox':
+                if (input.dataset.required) {
+                    this.result = BaseForm.isChecked(input) ? this.success(input) : this.error(input);                         //is checked
+                }
+                break
             default:
                 this.result = true;                                                                                          //The other inputs by default are valid
                 break;

@@ -338,9 +338,6 @@ var BaseForm = (function () {
     };
     BaseForm.prototype.validate = function (input) {
         switch (input.type) {
-            case 'checkbox':
-                this.result = false;
-                break;
             case 'text':
             case 'search':
             case 'email':
@@ -379,6 +376,11 @@ var BaseForm = (function () {
                 }
                 else {
                     this.generalValidations(input);
+                }
+                break;
+            case 'checkbox':
+                if (input.dataset.required) {
+                    this.result = BaseForm.isChecked(input) ? this.success(input) : this.error(input); //is checked
                 }
                 break;
             default:
