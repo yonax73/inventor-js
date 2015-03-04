@@ -324,6 +324,7 @@ class BaseForm {
     protected formControlFeedBackClass: string;
     protected successIconClass: string;
     protected errorIconClass: string;
+    protected  multiples:Array<number>;
 
     constructor(element: HTMLFormElement) {
         this.element = element;
@@ -342,17 +343,17 @@ class BaseForm {
     public isValid() {
         var n = this.inputs.length;
         var i = 0;
-        var multiples = new Array();
+         this.multiples = new Array();
         var totalMultiple = 1;
         while (i < n) {
             this.validate(this.inputs[i]);
-            multiples.push(this.result ? 1 : 0);
+            this.multiples.push(this.result ? 1 : 0);
             i++;
         }
         this.validateGroupCheckBox();
         i = 0;
         while (i < n) {
-            totalMultiple *= multiples[i];
+            totalMultiple *= this.multiples[i];
             i++;
         }
         return totalMultiple > 0;
@@ -413,8 +414,7 @@ class BaseForm {
     protected validateGroupCheckBox() {
         var groups = this.element.getElementsByClassName(this.iGroupChecboxClass);
         var n = groups ? groups.length : 0;
-        if (n > 0) {
-            this.result = false;    
+        if (n > 0) {               
             for (var g = 0; g < n; g++) {
                 var group: any = groups[g];
                 if (group.dataset.checkmin) {
@@ -442,6 +442,7 @@ class BaseForm {
                         this.result = this.error(group);
                     }
                 }
+                this.multiples.push(this.result ? 1 : 0);
             }
         }
     }

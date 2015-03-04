@@ -321,17 +321,17 @@ var BaseForm = (function () {
     BaseForm.prototype.isValid = function () {
         var n = this.inputs.length;
         var i = 0;
-        var multiples = new Array();
+        this.multiples = new Array();
         var totalMultiple = 1;
         while (i < n) {
             this.validate(this.inputs[i]);
-            multiples.push(this.result ? 1 : 0);
+            this.multiples.push(this.result ? 1 : 0);
             i++;
         }
         this.validateGroupCheckBox();
         i = 0;
         while (i < n) {
-            totalMultiple *= multiples[i];
+            totalMultiple *= this.multiples[i];
             i++;
         }
         return totalMultiple > 0;
@@ -394,7 +394,6 @@ var BaseForm = (function () {
         var groups = this.element.getElementsByClassName(this.iGroupChecboxClass);
         var n = groups ? groups.length : 0;
         if (n > 0) {
-            this.result = false;
             for (var g = 0; g < n; g++) {
                 var group = groups[g];
                 if (group.dataset.checkmin) {
@@ -427,6 +426,7 @@ var BaseForm = (function () {
                         this.result = this.error(group);
                     }
                 }
+                this.multiples.push(this.result ? 1 : 0);
             }
         }
     };
