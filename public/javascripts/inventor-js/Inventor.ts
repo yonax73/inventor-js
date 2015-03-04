@@ -634,7 +634,13 @@ class BaseForm {
             var found = false;
             do {
                 feedBack = <HTMLElement> feedBacks[i];
-                var tmpInput: HTMLInputElement = <HTMLInputElement>feedBack.getElementsByTagName('input')[0];
+                var tmpInput = null;
+                if (<HTMLInputElement>feedBack.getElementsByTagName('input')[0]) {
+                    tmpInput = <HTMLInputElement>feedBack.getElementsByTagName('input')[0];
+                } else {
+                    tmpInput = <HTMLTextAreaElement>feedBack.getElementsByTagName('textarea')[0];
+                }
+       
                 found = tmpInput.name === input.name;
                 i++;
             } while (!found && i < n);

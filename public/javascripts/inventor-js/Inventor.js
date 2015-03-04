@@ -629,7 +629,13 @@ var BaseForm = (function () {
             var found = false;
             do {
                 feedBack = feedBacks[i];
-                var tmpInput = feedBack.getElementsByTagName('input')[0];
+                var tmpInput = null;
+                if (feedBack.getElementsByTagName('input')[0]) {
+                    tmpInput = feedBack.getElementsByTagName('input')[0];
+                }
+                else {
+                    tmpInput = feedBack.getElementsByTagName('textarea')[0];
+                }
                 found = tmpInput.name === input.name;
                 i++;
             } while (!found && i < n);
@@ -1112,3 +1118,4 @@ var inventorjs_author = 'Yonatan Alexis Quintero Rodriguez';
 var inventorjs_version = '0.1';
 var inventorjs_email = 'yonax73@gmail.com';
 var inventorjs_twitter = '@yonax73';
+//# sourceMappingURL=Inventor.js.map
