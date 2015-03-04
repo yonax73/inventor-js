@@ -383,6 +383,8 @@ var BaseForm = (function () {
                     this.result = BaseForm.isChecked(input) ? this.success(input) : this.error(input); //is checked
                 }
                 break;
+            case 'radio':
+                break;
             default:
                 this.result = true; //The other inputs by default are valid
                 break;
