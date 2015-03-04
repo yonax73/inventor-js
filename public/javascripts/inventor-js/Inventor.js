@@ -330,6 +330,7 @@ var BaseForm = (function () {
         }
         this.validateGroupCheckBox();
         i = 0;
+        n = this.inputs.length;
         while (i < n) {
             totalMultiple *= multiples[i++];
         }
