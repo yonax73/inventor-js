@@ -640,7 +640,7 @@ class BaseForm {
                 } else {
                     tmpInput = <HTMLTextAreaElement>feedBack.getElementsByTagName('textarea')[0];
                 }
-                if (tmpInput.name) {
+                if (tmpInput) {
                     found = tmpInput.name === input.name;
                 }
                 i++;
