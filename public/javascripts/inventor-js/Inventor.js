@@ -330,12 +330,10 @@ var BaseForm = (function () {
         }
         this.validateGroupCheckBox();
         i = 0;
-        n = this.inputs.length;
         while (i < n) {
-            totalMultiple *= multiples[i++];
+            totalMultiple *= multiples[i];
+            i++;
         }
-        console.log(n);
-        console.log(totalMultiple);
         return totalMultiple > 0;
     };
     BaseForm.prototype.validate = function (input) {

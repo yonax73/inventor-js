@@ -350,13 +350,11 @@ class BaseForm {
             i++;
         }
         this.validateGroupCheckBox();
-        i = 0;
-        n = this.inputs.length;
+        i = 0;        
         while (i < n) {
-            totalMultiple *= multiples[i++];
+            totalMultiple *= multiples[i];
+            i++;
         }
-        console.log(n);
-        console.log(totalMultiple);
         return totalMultiple > 0;
     }
 
