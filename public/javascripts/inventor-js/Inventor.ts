@@ -411,16 +411,16 @@ class BaseForm {
                 if (group.dataset.checkmin) {
                     var min = group.dataset.checkmin;
                     if (this.countChecks(group) < min) {
-                        this.error(group);
+                        this.result = this.error(group);
                     } else {
-                        this.success(group);
+                        this.result = this.success(group);
                     }
                 } else if (group.dataset.checkmax) {
                     var max = group.dataset.checkmax;
                     if (this.countChecks(group) > max) {
-                        this.error(group);
+                        this.result = this.error(group);
                     } else {
-                        this.success(group);
+                        this.result = this.success(group);
                     }
                 } else if (group.dataset.checkrange) {
                     var range = group.dataset.checkrange.split('-');
@@ -428,9 +428,9 @@ class BaseForm {
                     var max = range[1];
                     var checks = this.countChecks(group);
                     if (checks >= min && checks <= max) {
-                        this.success(group);
+                        this.result = this.success(group);
                     } else {
-                        this.error(group);
+                        this.result = this.error(group);
                     }
                 }
             }
