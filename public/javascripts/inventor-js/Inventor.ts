@@ -80,9 +80,9 @@ class XHR {
         if (this.data) this.xhr.send(data);
         else this.xhr.send();
     }
-     /*
-     * ContentType by default is application/x-www-form-urlencoded;charset=UTF-8
-     */
+    /*
+    * ContentType by default is application/x-www-form-urlencoded;charset=UTF-8
+    */
     static byGet(action, onBeforeSend, onReady, onError?, _conteType?) {
         var xhr = new XMLHttpRequest();
         var conteType = _conteType ? _conteType : 'application/x-www-form-urlencoded;charset=UTF-8';
@@ -391,7 +391,7 @@ class BaseForm {
                         if (this.result) {
                             this.generalValidations(input);
                         }
-                    }   
+                    }
                 } else {
                     this.generalValidations(input);
                 }
@@ -499,7 +499,7 @@ class BaseForm {
             this.result = BaseForm.isNumber(input.value) ? this.success(input) : this.error(input);                        //Check number
         } else if (input.dataset.creditcard) {
             this.result = BaseForm.isCreditCard(input.value) ? this.success(input) : this.error(input);                    //Check credit card
-        }  else {
+        } else {
             this.success(input);
         }
     }
@@ -635,13 +635,14 @@ class BaseForm {
             do {
                 feedBack = <HTMLElement> feedBacks[i];
                 var tmpInput = null;
-                if (<HTMLInputElement>feedBack.getElementsByTagName('input')[0]) {
+                if (feedBack.getElementsByTagName('input')[0]) {
                     tmpInput = <HTMLInputElement>feedBack.getElementsByTagName('input')[0];
                 } else {
                     tmpInput = <HTMLTextAreaElement>feedBack.getElementsByTagName('textarea')[0];
                 }
-       
-                found = tmpInput.name === input.name;
+                if (tmpInput.name) {
+                    found = tmpInput.name === input.name;
+                }
                 i++;
             } while (!found && i < n);
         }

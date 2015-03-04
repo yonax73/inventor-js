@@ -636,7 +636,9 @@ var BaseForm = (function () {
                 else {
                     tmpInput = feedBack.getElementsByTagName('textarea')[0];
                 }
-                found = tmpInput.name === input.name;
+                if (tmpInput.name) {
+                    found = tmpInput.name === input.name;
+                }
                 i++;
             } while (!found && i < n);
         }
