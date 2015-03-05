@@ -7,7 +7,7 @@
     <meta name="description" content="Megift Theme Template By Inventorjs">
     <meta name="author" content="Yonatan Alexis Quintero Rodriguez | @yonax73 | yonax73@gmail.com">
     <link rel="icon" href="../../favicon.ico">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="../animations.min.css" rel="stylesheet" />
     <link href="megift.min.css" rel="stylesheet" />
     <script src="../../../javascripts/inventor-js/Inventor.min.js"></script>
@@ -124,7 +124,7 @@
         </div>
         <script>
 
-            var items = new ISelect(document.getElementById('select-items-example'), [
+            var items = new Select(document.getElementById('select-items-example'), [
                 { option: 1, value: 'item 1' },
                 { option: 2, value: 'item 2' },
                 { option: 3, value: 'item 3' },
@@ -907,8 +907,57 @@
                 </div>
             </div>
         </form>
-
-
+        <div class="row">
+            <form class="form-horizontal" id="create-gift-form">
+                <fieldset class="row">
+                    <legend>Puntos de venta</legend>
+                    <div data-checkmin="1" class="i-group-checkbox has-feedback has-error" id="cover-check-pos">
+                        <div class="col-lg-2 col-md-2 col-sm-4">
+                            <div class="form-group i-checkbox-horizontal cover-check cover-check-gift">
+                                <span class="i-checkbox i-checkbox-toolbar i-checkbox-right i-checkbox-toolbar-default">
+                                    <input type="checkbox" id="cover-check-gift-1" name="id-pos" value="1"><label for="cover-check-gift-1">
+                                        <div class="cover-check-header">Molinos</div>
+                                        <div class="cover-check-body">
+                                            <ul>
+                                                <li>CR 45 CL 27 10</li>
+                                                <li>5890623</li>
+                                                <li>Steve Jobs</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-4">
+                            <div class="form-group i-checkbox-horizontal cover-check cover-check-gift">
+                                <span class="i-checkbox i-checkbox-toolbar i-checkbox-right i-checkbox-toolbar-default">
+                                    <input type="checkbox" id="cover-check-gift-2" name="id-pos" value="2">
+                                    <label for="cover-check-gift-2">
+                                        <div class="cover-check-header">Belen Corazon</div>
+                                        <div class="cover-check-body">
+                                            <ul>
+                                                <li>CR 47 47 47</li>
+                                                <li>5890623</li>
+                                                <li>Bill Gates</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <small class="i-form-error-msg text-danger show" id="create-gift-popup-msg">seleccion como mínimo un punto de venta</small>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <button class="btn btn-danger btn-lg pull-right" type="submit" id="create-gift-btn">
+                    Continuar
+                    <i id="create-gift-btn-ico"></i>
+                </button>
+            </form>
+        </div>
     </div> <!-- /container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -918,7 +967,18 @@
     <script src="../../assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+        createGift();
+        function createGift() {
+            var createGiftForm = new Form(document.getElementById('create-gift-form'));
+            createGiftForm.onsubmit(function () {
+                if (createGiftForm.isValid()) {
 
+                    alert('ok');
+                } else { alert('error') }
+            })
+        }
+    </script>
 
 </body>
 </html>
