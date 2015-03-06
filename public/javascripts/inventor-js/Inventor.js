@@ -323,6 +323,7 @@ var BaseForm = (function () {
         var i = 0;
         this.multiples = new Array();
         var totalMultiple = 1;
+        this.result = true;
         while (i < n) {
             this.validate(this.inputs[i]);
             this.multiples.push(this.result ? 1 : 0);
@@ -330,6 +331,7 @@ var BaseForm = (function () {
         }
         this.validateGroupCheckBox();
         i = 0;
+        n = this.multiples.length;
         while (i < n) {
             totalMultiple *= this.multiples[i];
             i++;
@@ -1139,4 +1141,3 @@ var inventorjs_author = 'Yonatan Alexis Quintero Rodriguez';
 var inventorjs_version = '0.1';
 var inventorjs_email = 'yonax73@gmail.com';
 var inventorjs_twitter = '@yonax73';
-//# sourceMappingURL=Inventor.js.map
