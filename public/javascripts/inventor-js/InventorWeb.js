@@ -843,13 +843,13 @@ var Toggle = (function () {
                 var dropdown = dropdownsToggle[i].parentNode;
                 if (dropdown.classList.contains('open')) {
                     var dropdownMenu = dropdown.getElementsByClassName('dropdown-menu')[0];
-                    dropdownMenu.classList.add('ui-ease');
-                    dropdownMenu.classList.add('ui-0-5s');
-                    dropdownMenu.classList.add('ui-fade-out-up');
+                    dropdownMenu.classList.add('i-ease');
+                    dropdownMenu.classList.add('i-0-5s');
+                    dropdownMenu.classList.add('i-fade-out-up');
                     setTimeout(function () {
-                        dropdownMenu.classList.remove('ui-ease');
-                        dropdownMenu.classList.remove('ui-0-5s');
-                        dropdownMenu.classList.remove('ui-fade-out-up');
+                        dropdownMenu.classList.remove('i-ease');
+                        dropdownMenu.classList.remove('i-0-5s');
+                        dropdownMenu.classList.remove('i-fade-out-up');
                         dropdown.classList.remove('open');
                     }, 500);
                 }
