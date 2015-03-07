@@ -769,3 +769,92 @@ var DataTable = (function () {
     };
     return DataTable;
 })();
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
+@ Date : 07/03/2015
+@ Date update: 07/03/2015
+@ Update by: @yonax73 | yonax73@gmail.com
+@ Description: Toggle
+**/
+var Toggle = (function () {
+    function Toggle() {
+    }
+    Toggle.init = function () {
+        this.initNavBar();
+        this.initDropDown();
+    };
+    Toggle.initNavBar = function () {
+        var navbars = document.querySelectorAll('.navbar-toggle[data-toggle="collapse"]');
+        var n = navbars.length;
+        if (n > 0) {
+            for (var i = 0; i < n; i++) {
+                var element = navbars[i];
+                element.onclick = function () {
+                    var target = document.getElementById(this.dataset.target);
+                    this.classList.toggle('collapsed');
+                    target.classList.toggle('in');
+                };
+            }
+        }
+    };
+    Toggle.initDropDown = function () {
+        var dropdownsToggle = document.querySelectorAll('.dropdown-toggle[data-toggle="dropdown"]');
+        var n = dropdownsToggle.length;
+        if (n > 0) {
+            for (var i = 0; i < n; i++) {
+                var element = dropdownsToggle[i];
+                element.onclick = function (e) {
+                    var dropdown = this.parentNode;
+                    var dropdownMenu = dropdown.getElementsByClassName('dropdown-menu')[0];
+                    if (dropdown.classList.contains('open')) {
+                        dropdownMenu.classList.add('i-ease');
+                        dropdownMenu.classList.add('i-0-5s');
+                        dropdownMenu.classList.add('i-fade-out-up');
+                        setTimeout(function () {
+                            dropdownMenu.classList.remove('i-ease');
+                            dropdownMenu.classList.remove('i-0-5s');
+                            dropdownMenu.classList.remove('i-fade-out-up');
+                            dropdown.classList.remove('open');
+                        }, 500);
+                    }
+                    else {
+                        dropdown.classList.add('open');
+                        dropdownMenu.classList.add('i-ease');
+                        dropdownMenu.classList.add('i-0-5s');
+                        dropdownMenu.classList.add('i-fade-in-down');
+                        setTimeout(function () {
+                            dropdownMenu.classList.remove('i-ease');
+                            dropdownMenu.classList.remove('i-0-5s');
+                            dropdownMenu.classList.remove('i-fade-in-down');
+                        }, 500);
+                    }
+                    e.stopPropagation();
+                    return false;
+                };
+            }
+        }
+    };
+    Toggle.clearDropDown = function () {
+        var dropdownsToggle = document.querySelectorAll('.dropdown-toggle[data-toggle="dropdown"]');
+        var n = dropdownsToggle.length;
+        if (n > 0) {
+            for (var i = 0; i < n; i++) {
+                var dropdown = dropdownsToggle[i].parentNode;
+                if (dropdown.classList.contains('open')) {
+                    var dropdownMenu = dropdown.getElementsByClassName('dropdown-menu')[0];
+                    dropdownMenu.classList.add('ui-ease');
+                    dropdownMenu.classList.add('ui-0-5s');
+                    dropdownMenu.classList.add('ui-fade-out-up');
+                    setTimeout(function () {
+                        dropdownMenu.classList.remove('ui-ease');
+                        dropdownMenu.classList.remove('ui-0-5s');
+                        dropdownMenu.classList.remove('ui-fade-out-up');
+                        dropdown.classList.remove('open');
+                    }, 500);
+                }
+            }
+        }
+    };
+    return Toggle;
+})();

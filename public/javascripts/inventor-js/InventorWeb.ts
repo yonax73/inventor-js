@@ -14,7 +14,7 @@ enum ETypeSelect {
 }
 class Select {
 
-    
+
     private hidden = document.createElement('input');
     private input: any = document.createElement('input');
     private mask = document.createElement('div');
@@ -40,7 +40,7 @@ class Select {
     private action: String;
     private callback;
 
-    constructor(htmlElement: HTMLElement,action,callback,data, options) {
+    constructor(htmlElement: HTMLElement, action, callback, data, options) {
         this.element = htmlElement;
         this.action = action;
         this.callback = callback;
@@ -48,10 +48,10 @@ class Select {
         if (options) this.setOptions(options);
         this.animaIn = new Animation('i-ease', 'i-flip-in-x', 'i-2s', 200);
         this.animaOut = new Animation('i-ease', 'i-flip-out-x', 'i-0-2s', 200);
-        this.itemSate = new State();       
+        this.itemSate = new State();
         this.hidden.type = 'hidden';
-        if (this.element.getAttribute('data-name')) this.hidden.name = this.element.getAttribute('data-name');   
-        if (this.element.getAttribute('data-required')) this.input.dataset.required = this.element.getAttribute('data-required');        
+        if (this.element.getAttribute('data-name')) this.hidden.name = this.element.getAttribute('data-name');
+        if (this.element.getAttribute('data-required')) this.input.dataset.required = this.element.getAttribute('data-required');
         this.input.type = 'text';
         this.input.className = 'form-control';
         if (this.element.classList.contains(this.inputLgClass)) this.input.classList.add('input-lg');
@@ -87,7 +87,7 @@ class Select {
             e.stopPropagation();
             return false;
         }
-        this.element.appendChild(this.ico);        
+        this.element.appendChild(this.ico);
         this.items.className = 'i-select-items';
         this.element.appendChild(this.items);
         this.config();
@@ -155,7 +155,7 @@ class Select {
         } else {
             this.fillItems();
             if (this.callback) this.callback();
-        }       
+        }
     }
 
     private fillItems() {
@@ -194,7 +194,7 @@ class Select {
                 this.selectItem(item.option);
             }
         }
-        
+
     }
 
     private addIcon(element: HTMLElement, classIcon: string) {
@@ -798,4 +798,94 @@ class DataTable {
         this.element.removeChild(this.icoLoading);
     }
 
+}
+/**
+@ Autor :@yonax73 | yonax73@gmail.com
+@ Version: 0.1
+@ Date : 07/03/2015
+@ Date update: 07/03/2015
+@ Update by: @yonax73 | yonax73@gmail.com
+@ Description: Toggle
+**/
+class Toggle {
+
+    static init() {
+        this.initNavBar();
+        this.initDropDown();
+    }
+
+    private static initNavBar() {
+        var navbars = document.querySelectorAll('.navbar-toggle[data-toggle="collapse"]');
+        var n = navbars.length;
+        if (n > 0) {
+
+            for (var i = 0; i < n; i++) {
+                var element: any = navbars[i];
+                element.onclick = function () {
+                    var target = document.getElementById(this.dataset.target);
+                    this.classList.toggle('collapsed');
+                    target.classList.toggle('in');
+                }
+            }
+        }
+    }
+
+    private static initDropDown() {
+        var dropdownsToggle = document.querySelectorAll('.dropdown-toggle[data-toggle="dropdown"]');
+        var n = dropdownsToggle.length;
+        if (n > 0) {
+            for (var i = 0; i < n; i++) {
+                var element: any = dropdownsToggle[i];
+                element.onclick = function (e) {
+                    var dropdown = this.parentNode;
+                    var dropdownMenu = dropdown.getElementsByClassName('dropdown-menu')[0];
+                    if (dropdown.classList.contains('open')) {
+                        dropdownMenu.classList.add('i-ease');
+                        dropdownMenu.classList.add('i-0-5s');
+                        dropdownMenu.classList.add('i-fade-out-up');
+                        setTimeout(function () {
+                            dropdownMenu.classList.remove('i-ease');
+                            dropdownMenu.classList.remove('i-0-5s');
+                            dropdownMenu.classList.remove('i-fade-out-up');
+                            dropdown.classList.remove('open');
+                        }, 500);
+                    } else {
+                        dropdown.classList.add('open');
+                        dropdownMenu.classList.add('i-ease');
+                        dropdownMenu.classList.add('i-0-5s');
+                        dropdownMenu.classList.add('i-fade-in-down');
+                        setTimeout(function () {
+                            dropdownMenu.classList.remove('i-ease');
+                            dropdownMenu.classList.remove('i-0-5s');
+                            dropdownMenu.classList.remove('i-fade-in-down');
+                        }, 500);
+                    }
+                    e.stopPropagation();
+                    return false;
+                }
+            }
+        }
+    }
+
+    static clearDropDown() {
+        var dropdownsToggle = document.querySelectorAll('.dropdown-toggle[data-toggle="dropdown"]');
+        var n = dropdownsToggle.length;
+        if (n > 0) {
+            for (var i = 0; i < n; i++) {
+                var dropdown: any = dropdownsToggle[i].parentNode;
+                if (dropdown.classList.contains('open')) {
+                    var dropdownMenu = dropdown.getElementsByClassName('dropdown-menu')[0];
+                    dropdownMenu.classList.add('ui-ease');
+                    dropdownMenu.classList.add('ui-0-5s');
+                    dropdownMenu.classList.add('ui-fade-out-up');
+                    setTimeout(function () {
+                        dropdownMenu.classList.remove('ui-ease');
+                        dropdownMenu.classList.remove('ui-0-5s');
+                        dropdownMenu.classList.remove('ui-fade-out-up');
+                        dropdown.classList.remove('open');
+                    }, 500);
+                }
+            }
+        }
+    }
 }
