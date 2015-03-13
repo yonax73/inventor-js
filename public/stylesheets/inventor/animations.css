@@ -46,8 +46,8 @@ SOFTWARE.*/
     } 
 
     100% { 
-         -webkit-transform: scale(1); 
-    } 
+       -webkit-transform: scale(1); 
+   } 
 } 
 
 @keyframes bounceIn { 
@@ -104,20 +104,20 @@ SOFTWARE.*/
     } 
 } 
 @-webkit-keyframes bounceInDown { 
-   0% { 
-       opacity: 0; 
-        -webkit-transform: translateY(-2000px); 
-    } 
-    60% { 
-        opacity: 1; 
-        -webkit-transform: translateY(30px); 
-    } 
-    80% { 
-        -webkit-transform: translateY(-10px); 
-    } 
-    100% { 
-        -webkit-transform: translateY(0); 
-    } 
+ 0% { 
+     opacity: 0; 
+     -webkit-transform: translateY(-2000px); 
+ } 
+ 60% { 
+    opacity: 1; 
+    -webkit-transform: translateY(30px); 
+} 
+80% { 
+    -webkit-transform: translateY(-10px); 
+} 
+100% { 
+    -webkit-transform: translateY(0); 
+} 
 } 
 
 @keyframes bounceInDown { 
@@ -412,7 +412,7 @@ SOFTWARE.*/
         transform: translateX(0); 
     } 
 } 
- 
+
 @-webkit-keyframes fadeInRight { 
     0% { 
         opacity: 0; 
@@ -855,10 +855,10 @@ SOFTWARE.*/
     100% { transform: translateY(700px); opacity: 0; } 
 } 
 @-webkit-keyframes lightSpeedIn { 
-   0% { -webkit-transform: translateX(100%) skewX(-30deg); opacity: 0; } 
-    60% { -webkit-transform: translateX(-20%) skewX(30deg); opacity: 1; } 
-    80% { -webkit-transform: translateX(0%) skewX(-15deg); opacity: 1; } 
-    100% { -webkit-transform: translateX(0%) skewX(0deg); opacity: 1; } 
+ 0% { -webkit-transform: translateX(100%) skewX(-30deg); opacity: 0; } 
+ 60% { -webkit-transform: translateX(-20%) skewX(30deg); opacity: 1; } 
+ 80% { -webkit-transform: translateX(0%) skewX(-15deg); opacity: 1; } 
+ 100% { -webkit-transform: translateX(0%) skewX(0deg); opacity: 1; } 
 } 
 @keyframes lightSpeedIn { 
     0% { transform: translateX(100%) skewX(-30deg); opacity: 0; } 
@@ -1217,7 +1217,7 @@ SOFTWARE.*/
     90% { transform: skewX(0deg); } 
     100% { transform: skewX(0deg); } 
 } 
- 
+
 @-webkit-keyframes wobble { 
   0% { -webkit-transform: translateX(0%); } 
   15% { -webkit-transform: translateX(-25%) rotate(-5deg); } 
@@ -1302,6 +1302,10 @@ SOFTWARE.*/
 	-webkit-animation-duration: 5s; 
     animation-duration: 5s;
 } 
+
+.i-infinite{
+      animation-iteration-count: infinite;
+}
 
 .i-bounce { 
     -webkit-animation-name: bounce; 
@@ -1468,7 +1472,7 @@ SOFTWARE.*/
     animation-name: lightSpeedIn; 
     -webkit-animation-timing-function: ease-out; 
     animation-timing-function: ease-out; 
-   -webkit-animation-duration: 0.5s; 
+    -webkit-animation-duration: 0.5s; 
     animation-duration: 0.5s; 
 }
 .i-light-speed-out { 
