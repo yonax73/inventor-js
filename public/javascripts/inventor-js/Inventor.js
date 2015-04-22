@@ -701,7 +701,7 @@ var BaseForm = (function () {
     * @returns true if value is empty
     */
     BaseForm.isEmpty = function (value) {
-        return !value.match(/^\S+$|[^\s]+$/);
+        return value.match(/^\s*$/g);
     };
     /*
     * @param String value
@@ -1141,3 +1141,4 @@ var inventorjs_author = 'Yonatan Alexis Quintero Rodriguez';
 var inventorjs_version = '0.1';
 var inventorjs_email = 'yonax73@gmail.com';
 var inventorjs_twitter = '@yonax73';
+//# sourceMappingURL=Inventor.js.map

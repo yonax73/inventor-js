@@ -710,7 +710,7 @@ class BaseForm {
     * @returns true if value is empty
     */
     static isEmpty(value) {
-        return !value.match(/^\S+$|[^\s]+$/);
+        return value.match(/^\s*$/g);
     }
     /*    
     * @param String value 
