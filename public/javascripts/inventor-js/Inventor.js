@@ -701,7 +701,7 @@ var BaseForm = (function () {
     * @returns true if value is empty
     */
     BaseForm.isEmpty = function (value) {
-        return value.match(/^\s*$/g);
+        return value.trim().match(/^\s*$/g);
     };
     /*
     * @param String value
